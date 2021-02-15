@@ -5,6 +5,7 @@
 namespace dae
 {
 	class Texture2D;
+	class BaseComponent;
 	class GameObject : public SceneObject
 	{
 	public:
@@ -24,5 +25,6 @@ namespace dae
 	private:
 		Transform m_Transform;
 		std::shared_ptr<Texture2D> m_Texture{};
+		std::vector<BaseComponent> m_pComponents{};
 	};
 }
