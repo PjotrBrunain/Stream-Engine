@@ -44,11 +44,11 @@ void dae::Minigin::LoadGame() const
 {
 	auto& scene = SceneManager::GetInstance().CreateScene("Demo");
 
-	auto go = std::make_shared<GameObject>();
+	auto go = std::make_shared<StreamEngine::GameObject>();
 	go->SetTexture("background.jpg");
 	scene.Add(go);
 
-	go = std::make_shared<GameObject>();
+	go = std::make_shared<StreamEngine::GameObject>();
 	go->SetTexture("logo.png");
 	go->SetPosition(216, 180);
 	scene.Add(go);
@@ -82,12 +82,20 @@ void dae::Minigin::Run()
 		auto& input = InputManager::GetInstance();
 
 		bool doContinue = true;
+		auto lastTime = high_resolution_clock::now();
+		float lag = 0.0f;
 		while (doContinue)
 		{
 			const auto currentTime = high_resolution_clock::now();
-			
+			const float deltaTime = duration<float>(currentTime - lastTime).count();
+			lastTime = currentTime;
+			lag += deltaTime;
 			doContinue = input.ProcessInput();
-			sceneManager.Update();
+			while (lag >= m_MsPerUpdate)
+			{
+				sceneManager.Update(m_MsPerUpdate);
+				lag -= m_MsPerUpdate;
+			}
 			renderer.Render();
 			
 			auto sleepTime = duration_cast<duration<float>>(currentTime + milliseconds(MsPerFrame) - high_resolution_clock::now());

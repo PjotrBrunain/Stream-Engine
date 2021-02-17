@@ -1,19 +1,29 @@
 #pragma once
 #include "Transform.h"
-#include "SceneObject.h"
 
-namespace dae
+namespace StreamEngine
 {
 	class Texture2D;
 	class BaseComponent;
-	class GameObject : public SceneObject
+	class GameObject final
 	{
 	public:
-		void Update() override;
-		void Render() const override;
+		void Update();
 
 		void SetTexture(const std::string& filename);
-		void SetPosition(float x, float y);
+		void AddComponent(BaseComponent* pComponent);
+		template <typename T>
+		T* GetComponent()
+		{
+			for (BaseComponent* bc: m_pComponents)
+			{
+				if (typeid(*bc) == typeid(T))
+				{
+					return dynamic_cast<T>(bc);
+				}
+			}
+			return nullptr;
+		}
 
 		GameObject() = default;
 		virtual ~GameObject();
@@ -23,8 +33,7 @@ namespace dae
 		GameObject& operator=(GameObject&& other) = delete;
 
 	private:
-		Transform m_Transform;
 		std::shared_ptr<Texture2D> m_Texture{};
-		std::vector<BaseComponent> m_pComponents{};
+		std::vector<BaseComponent*> m_pComponents{};
 	};
 }

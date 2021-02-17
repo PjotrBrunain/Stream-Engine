@@ -4,14 +4,25 @@
 #include <glm/vec3.hpp>
 #pragma warning(pop)
 
-namespace dae
+#include "BaseComponent.h"
+
+namespace StreamEngine
 {
-	class Transform final
+	class Transform final : public BaseComponent
 	{
 	public:
+		Transform();
+		virtual ~Transform();
+
+		Transform(const Transform&) = delete;
+		Transform(Transform&&) noexcept = delete;
+		Transform& operator=(const Transform&) = delete;
+		Transform& operator=(Transform&&) = delete;
+
 		const glm::vec3& GetPosition() const { return m_Position; }
 		void SetPosition(float x, float y, float z);
 	private:
 		glm::vec3 m_Position;
 	};
 }
+

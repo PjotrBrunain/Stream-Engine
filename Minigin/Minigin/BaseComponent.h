@@ -6,8 +6,10 @@ namespace StreamEngine
 	{
 	public:
 		BaseComponent();
-		~BaseComponent();
+		virtual ~BaseComponent();
 
+		virtual void run() = 0;
+		
 		BaseComponent(const BaseComponent&) = delete;
 		BaseComponent(BaseComponent&&) noexcept = delete;
 		BaseComponent& operator=(const BaseComponent&) = delete;
