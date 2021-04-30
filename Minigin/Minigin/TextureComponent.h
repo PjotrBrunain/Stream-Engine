@@ -4,17 +4,26 @@
 
 namespace StreamEngine
 {
+	class Texture2D;
+	
 	class TextureComponent final : public BaseComponent
 	{
 	public:
-		TextureComponent(const std::string& texturePath);
+		TextureComponent(const std::string& texturePath, std::weak_ptr<GameObject> pOwningGameObject);
 		virtual ~TextureComponent();
 
-		void run() override;
+		//void Update(float deltaTime) override;
+		//void FixedUpdate(float deltaTime) override;
+		//void LateUpdate(float deltaTime) override;
+
+		void Render() override;
 
 		TextureComponent(const TextureComponent&) = delete;
 		TextureComponent(TextureComponent&&) noexcept = delete;
 		TextureComponent& operator=(const TextureComponent&) = delete;
 		TextureComponent& operator=(TextureComponent&&) noexcept = delete;
+
+	private:
+		std::shared_ptr<Texture2D> m_pTexture;
 	};
 }

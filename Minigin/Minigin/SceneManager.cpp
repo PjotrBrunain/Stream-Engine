@@ -2,15 +2,31 @@
 #include "SceneManager.h"
 #include "Scene.h"
 
-void dae::SceneManager::Update(float deltaTime)
+void StreamEngine::SceneManager::Update(const float deltaTime)
 {
 	for(auto& scene : m_Scenes)
 	{
-		scene->Update();
+		scene->Update(deltaTime);
 	}
 }
 
-void dae::SceneManager::Render()
+void StreamEngine::SceneManager::FixedUpdate(const float deltaTime)
+{
+	for (auto& scene : m_Scenes)
+	{
+		scene->FixedUpdate(deltaTime);
+	}
+}
+
+void StreamEngine::SceneManager::LateUpdate(const float deltaTime)
+{
+	for (auto& scene : m_Scenes)
+	{
+		scene->LateUpdate(deltaTime);
+	}
+}
+
+void StreamEngine::SceneManager::Render()
 {
 	for (const auto& scene : m_Scenes)
 	{
@@ -18,9 +34,9 @@ void dae::SceneManager::Render()
 	}
 }
 
-dae::Scene& dae::SceneManager::CreateScene(const std::string& name)
+StreamEngine::Scene& StreamEngine::SceneManager::CreateScene(const std::string& name)
 {
-	const auto scene = std::shared_ptr<Scene>(new Scene(name));
+	const auto scene = std::shared_ptr<Scene>(std::make_shared<Scene>(name));
 	m_Scenes.push_back(scene);
-	return *scene;
+	return *scene.get();
 }

@@ -5,35 +5,45 @@ namespace StreamEngine
 {
 	class Texture2D;
 	class BaseComponent;
-	class GameObject final
+	class GameObject final : std::enable_shared_from_this<GameObject>
 	{
 	public:
-		void Update();
+		void Update(float deltaTime);
+		void FixedUpdate(float deltaTime);
+		void LateUpdate(float deltaTime);
 
-		void SetTexture(const std::string& filename);
-		void AddComponent(BaseComponent* pComponent);
+		void AddComponent(std::shared_ptr<BaseComponent> pComponent);
 		template <typename T>
-		T* GetComponent()
+		std::shared_ptr<T> GetComponent()
 		{
-			for (BaseComponent* bc: m_pComponents)
+			for (std::shared_ptr<BaseComponent> bc: m_pComponents)
 			{
-				if (typeid(*bc) == typeid(T))
+				BaseComponent* rawBc = bc.get();
+				if (typeid(*rawBc) == typeid(T))
 				{
-					return dynamic_cast<T>(bc);
+					//return dynamic_cast<T>(bc);
+					return std::dynamic_pointer_cast<T>(bc);
 				}
 			}
 			return nullptr;
 		}
 
+		Transform& GetTransform();
+
+		void Render();
+
+		bool IsVisual() const;
+
 		GameObject() = default;
-		virtual ~GameObject();
+		~GameObject();
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
 
 	private:
-		std::shared_ptr<Texture2D> m_Texture{};
-		std::vector<BaseComponent*> m_pComponents{};
+		std::vector<std::shared_ptr<BaseComponent>> m_pComponents{};
+		bool m_IsVisual{};
+		Transform m_Transform{ weak_from_this() };
 	};
 }

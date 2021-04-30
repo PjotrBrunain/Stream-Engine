@@ -4,7 +4,7 @@
 struct SDL_Window;
 struct SDL_Renderer;
 
-namespace dae
+namespace StreamEngine
 {
 	class Texture2D;
 	/**

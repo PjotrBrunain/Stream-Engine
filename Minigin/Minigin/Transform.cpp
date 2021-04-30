@@ -1,7 +1,8 @@
 #include "MiniginPCH.h"
 #include "Transform.h"
 
-StreamEngine::Transform::Transform()
+StreamEngine::Transform::Transform(std::weak_ptr<GameObject> pOwningGameObject)
+	:BaseComponent(false, pOwningGameObject)
 {
 }
 

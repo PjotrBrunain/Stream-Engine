@@ -1,16 +1,20 @@
 #pragma once
 #include "SceneManager.h"
 
-namespace dae
+namespace StreamEngine
 {
-	class SceneObject;
+	class GameObject;
 	class Scene
 	{
 		friend Scene& SceneManager::CreateScene(const std::string& name);
 	public:
-		void Add(const std::shared_ptr<SceneObject>& object);
+		explicit Scene(const std::string& name);
 
-		void Update();
+		void Add(const std::shared_ptr<GameObject>& object);
+
+		void Update(float deltaTime);
+		void FixedUpdate(float deltaTime);
+		void LateUpdate(float deltaTime);
 		void Render() const;
 
 		~Scene();
@@ -20,10 +24,9 @@ namespace dae
 		Scene& operator=(Scene&& other) = delete;
 
 	private: 
-		explicit Scene(const std::string& name);
 
 		std::string m_Name;
-		std::vector < std::shared_ptr<SceneObject>> m_Objects{};
+		std::vector < std::shared_ptr<GameObject>> m_Objects{};
 
 		static unsigned int m_IdCounter; 
 	};

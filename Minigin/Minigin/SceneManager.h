@@ -1,7 +1,7 @@
 #pragma once
 #include "Singleton.h"
 
-namespace dae
+namespace StreamEngine
 {
 	class Scene;
 	class SceneManager final : public Singleton<SceneManager>
@@ -9,7 +9,9 @@ namespace dae
 	public:
 		Scene& CreateScene(const std::string& name);
 
-		void Update(float deltaTime);
+		void Update(const float deltaTime);
+		void FixedUpdate(const float deltaTime);
+		void LateUpdate(const float deltaTime);
 		void Render();
 	private:
 		friend class Singleton<SceneManager>;

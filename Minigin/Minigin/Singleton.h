@@ -1,5 +1,5 @@
 #pragma once
-namespace dae
+namespace StreamEngine
 {
 	template <typename T>
 	class Singleton
