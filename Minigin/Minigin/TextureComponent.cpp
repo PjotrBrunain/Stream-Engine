@@ -2,7 +2,6 @@
 #include "TextureComponent.h"
 
 #include "GameObject.h"
-#include "Texture2D.h"
 
 #include "ResourceManager.h"
 #include "Renderer.h"

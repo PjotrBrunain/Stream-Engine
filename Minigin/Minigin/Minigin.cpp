@@ -10,13 +10,14 @@
 #include "TextureComponent.h"
 #include "GameObject.h"
 #include "Scene.h"
+#include "TextComponent.h"
 
 using namespace std;
 using namespace std::chrono;
 
 void StreamEngine::Minigin::Initialize()
 {
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) 
+	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 	{
 		throw std::runtime_error(std::string("SDL_Init Error: ") + SDL_GetError());
 	}
@@ -29,7 +30,7 @@ void StreamEngine::Minigin::Initialize()
 		480,
 		SDL_WINDOW_OPENGL
 	);
-	if (m_Window == nullptr) 
+	if (m_Window == nullptr)
 	{
 		throw std::runtime_error(std::string("SDL_CreateWindow Error: ") + SDL_GetError());
 	}
@@ -47,10 +48,28 @@ void StreamEngine::Minigin::LoadGame() const
 	shared_ptr<GameObject> background{ std::make_shared<GameObject>() };
 
 	background->AddComponent(std::make_shared<TextureComponent>("background.jpg", background));
-	
+
 	scene.Add(background);
-	
-	
+
+	shared_ptr<GameObject> logo{ std::make_shared<GameObject>() };
+
+	logo->AddComponent(std::make_shared<TextureComponent>("logo.png", logo));
+	logo->GetTransform().SetPosition(216, 180, 0);
+
+	scene.Add(logo);
+
+	shared_ptr<GameObject> text{ std::make_shared<GameObject>() };
+
+	text->AddComponent(std::make_shared<TextComponent>("Lingua.otf", text));
+
+	text->GetTransform().SetPosition(80, 20, 0);
+
+	text->GetComponent<TextComponent>()->SetText("Programming 4 Assignment");
+
+	text->GetComponent<TextComponent>()->SetSize(36);
+
+	scene.Add(text);
+
 	//auto go = std::make_shared<StreamEngine::GameObject>();
 	//go->SetTexture("background.jpg");
 	//scene.Add(go);
@@ -106,7 +125,7 @@ void StreamEngine::Minigin::Run()
 			}
 			sceneManager.LateUpdate(deltaTime);
 			renderer.Render();
-			
+
 			auto sleepTime = duration_cast<duration<float>>(currentTime + milliseconds(MsPerFrame) - high_resolution_clock::now());
 			this_thread::sleep_for(sleepTime);
 		}

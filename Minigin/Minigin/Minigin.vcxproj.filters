@@ -58,6 +58,9 @@
     <ClInclude Include="Transform.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="TextComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TextureComponent.cpp">
@@ -100,6 +103,9 @@
       <Filter>Base</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TextComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
