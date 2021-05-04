@@ -7,6 +7,8 @@
 #include "Renderer.h"
 #include "ResourceManager.h"
 #include <SDL.h>
+
+#include "FPSComponent.h"
 #include "TextureComponent.h"
 #include "GameObject.h"
 #include "Scene.h"
@@ -70,6 +72,25 @@ void StreamEngine::Minigin::LoadGame() const
 
 	scene.Add(text);
 
+
+	shared_ptr<GameObject> fpsCounter{ std::make_shared<GameObject>() };
+
+	std::shared_ptr<TextComponent> txtComponent{ std::make_shared<TextComponent>("Lingua.otf",fpsCounter) };
+	txtComponent->SetSize(26);
+	txtComponent->SetColor({ 0,255,0,255 });
+	std::shared_ptr<FPSComponent> fpsComponent{ std::make_shared<FPSComponent>(fpsCounter) };
+	txtComponent->LinkText(fpsComponent->GetTextLink());
+	txtComponent->SetDoUpdate(true);
+
+	fpsCounter->AddComponent(txtComponent);
+	fpsCounter->AddComponent(fpsComponent);
+
+	fpsCounter->GetTransform().SetPosition(0, 0, 0);
+
+	scene.Add(fpsCounter);
+
+
+	
 	//auto go = std::make_shared<StreamEngine::GameObject>();
 	//go->SetTexture("background.jpg");
 	//scene.Add(go);

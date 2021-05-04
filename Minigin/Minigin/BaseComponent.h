@@ -16,7 +16,7 @@ namespace StreamEngine
 		virtual void FixedUpdate(float deltaTime) {};
 		virtual void LateUpdate(float deltaTime) {};
 #pragma warning (pop)
-		virtual void Render() = 0;
+		virtual void Render() {};
 
 		bool IsVisual() const;
 		

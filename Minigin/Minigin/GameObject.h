@@ -43,7 +43,11 @@ namespace StreamEngine
 
 	private:
 		std::vector<std::shared_ptr<BaseComponent>> m_pComponents{};
+		std::vector<std::shared_ptr<GameObject>> m_pChildObjects{};
 		bool m_IsVisual{};
 		Transform m_Transform{ weak_from_this() };
+
+		std::string m_Name{};
+		std::weak_ptr<GameObject> m_pOwner{};
 	};
 }

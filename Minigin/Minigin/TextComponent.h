@@ -15,9 +15,13 @@ namespace StreamEngine
 		virtual ~TextComponent();
 
 		void Render() override;
+		void Update(float deltaTime) override;
 
 		void SetText(const std::string& text);
+		void LinkText(const std::shared_ptr<std::string> pText);
 		void SetSize(const int& size);
+		void SetColor(const SDL_Color& color);
+		void SetDoUpdate(bool updateText);
 
 		TextComponent(const TextComponent&) = delete;
 		TextComponent(TextComponent&&) noexcept = delete;
@@ -28,10 +32,12 @@ namespace StreamEngine
 		std::shared_ptr<Font> m_pFont;
 		std::shared_ptr<Texture2D> m_pTexture;
 		SDL_Color m_Color;
-		std::string m_Text;
+		std::shared_ptr<std::string> m_pText;
 		int m_Size;
 		std::string m_FontPath;
 
+		bool m_UpdateText;
+		
 		void CreateTextTexture();
 	};
 }
