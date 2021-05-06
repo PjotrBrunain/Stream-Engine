@@ -75,15 +75,15 @@ void StreamEngine::Minigin::LoadGame() const
 
 	shared_ptr<GameObject> fpsCounter{ std::make_shared<GameObject>() };
 
-	std::shared_ptr<TextComponent> txtComponent{ std::make_shared<TextComponent>("Lingua.otf",fpsCounter) };
-	txtComponent->SetSize(26);
-	txtComponent->SetColor({ 0,255,0,255 });
-	std::shared_ptr<FPSComponent> fpsComponent{ std::make_shared<FPSComponent>(fpsCounter) };
-	txtComponent->LinkText(fpsComponent->GetTextLink());
-	txtComponent->SetDoUpdate(true);
+	std::shared_ptr<TextComponent> pTxtComponent{ std::make_shared<TextComponent>("Lingua.otf",fpsCounter) };
+	pTxtComponent->SetSize(26);
+	pTxtComponent->SetColor({ 0,255,0,255 });
+	const std::shared_ptr<FPSComponent> pFPSComponent{ std::make_shared<FPSComponent>(fpsCounter) };
+	pTxtComponent->LinkText(pFPSComponent->GetTextLink());
+	pTxtComponent->SetDoUpdate(true);
 
-	fpsCounter->AddComponent(txtComponent);
-	fpsCounter->AddComponent(fpsComponent);
+	fpsCounter->AddComponent(pTxtComponent);
+	fpsCounter->AddComponent(pFPSComponent);
 
 	fpsCounter->GetTransform().SetPosition(0, 0, 0);
 
