@@ -20,5 +20,7 @@ namespace StreamEngine
 		FPSComponent& operator=(FPSComponent&&) noexcept = delete;
 	private:
 		std::shared_ptr<std::string> m_pText;
+		float m_AccumulatedTime;
+		const float m_UpdateTimeSec;
 	};
 }

@@ -64,6 +64,12 @@
     <ClInclude Include="FPSComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCommand.h">
+      <Filter>Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TextureComponent.cpp">

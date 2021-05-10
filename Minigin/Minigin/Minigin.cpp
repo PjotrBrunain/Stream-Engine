@@ -13,6 +13,7 @@
 #include "GameObject.h"
 #include "Scene.h"
 #include "TextComponent.h"
+#include "TestCommand.h"
 
 using namespace std;
 using namespace std::chrono;
@@ -89,7 +90,7 @@ void StreamEngine::Minigin::LoadGame() const
 
 	scene.Add(fpsCounter);
 
-
+	InputManager::GetInstance().SetCommand(FlexibleCommand{ std::make_shared<TestCommand>(), true, ControllerButton::ButtonA });
 	
 	//auto go = std::make_shared<StreamEngine::GameObject>();
 	//go->SetTexture("background.jpg");
