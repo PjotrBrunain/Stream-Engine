@@ -37,7 +37,7 @@
     <ClInclude Include="InputManager.h">
       <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="Minigin.h">
+    <ClInclude Include="Stream-Engine.h">
       <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="MiniginPCH.h">
@@ -96,7 +96,7 @@
     <ClCompile Include="Main.cpp">
       <Filter>Base</Filter>
     </ClCompile>
-    <ClCompile Include="Minigin.cpp">
+    <ClCompile Include="Stream-Engine.cpp">
       <Filter>Base</Filter>
     </ClCompile>
     <ClCompile Include="MiniginPCH.cpp">

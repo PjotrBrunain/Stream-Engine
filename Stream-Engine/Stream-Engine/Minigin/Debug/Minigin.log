@@ -5,7 +5,7 @@
   GameObject.cpp
   InputManager.cpp
   Main.cpp
-  Minigin.cpp
+  Stream-Engine.cpp
   Renderer.cpp
   ResourceManager.cpp
   Scene.cpp
@@ -18,7 +18,7 @@
 SDL2_image.lib(SDL2_image.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 SDL2_ttf.lib(SDL2_ttf.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
 xinput.lib(XINPUT1_4.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
-  Minigin.vcxproj -> E:\Prog 4\Stream-Engine\Stream-Engine\Stream-Engine\Lib\Debug\Minigin.lib
+  Minigin.vcxproj -> E:\Prog 4\Stream-Engine\Stream-Engine\Stream-Engine\Lib\Debug\Stream-Engine.lib
   E:\Prog 4\Stream-Engine\Stream-Engine\Stream-Engine\3rdParty\SDL2\lib\x86\SDL2.dll
   1 File(s) copied
   E:\Prog 4\Stream-Engine\Stream-Engine\Stream-Engine\3rdParty\SDL2_image\lib\x86\libjpeg-9.dll

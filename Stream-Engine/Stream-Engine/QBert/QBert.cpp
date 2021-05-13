@@ -3,11 +3,11 @@
 #endif
 
 #include "SDL.h"
-#include "Minigin.h"
+#include "Stream-Engine.h"
 
 int main(int, char*[])
 {
-    StreamEngine::Minigin engine{};
+    StreamEngine::Streamgin engine{};
 	engine.Run();
 	return 0;
 }
