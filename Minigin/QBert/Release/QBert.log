@@ -1,0 +1,5 @@
+﻿  QBert.cpp
+     Creating library ..\Build\Release\QBert.lib and object ..\Build\Release\QBert.exp
+QBert.obj : error LNK2001: unresolved external symbol "public: void __cdecl StreamEngine::Minigin::Run(void)" (?Run@Minigin@StreamEngine@@QEAAXXZ)
+MSVCRT.lib(exe_main.obj) : error LNK2001: unresolved external symbol main
+..\Build\Release\QBert.exe : fatal error LNK1120: 2 unresolved externals

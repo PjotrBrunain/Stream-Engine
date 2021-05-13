@@ -1,0 +1,33 @@
+﻿  MiniginPCH.cpp
+  BaseComponent.cpp
+  Font.cpp
+  FPSComponent.cpp
+  GameObject.cpp
+  InputManager.cpp
+  Main.cpp
+  Minigin.cpp
+  Renderer.cpp
+  ResourceManager.cpp
+  Scene.cpp
+  SceneManager.cpp
+  TextComponent.cpp
+  Texture2D.cpp
+  TextureComponent.cpp
+  Transform.cpp
+  Generating Code...
+SDL2_image.lib(SDL2_image.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
+SDL2_ttf.lib(SDL2_ttf.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
+xinput.lib(XINPUT1_4.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
+  Minigin.vcxproj -> E:\Prog 4\Stream-Engine\Stream-Engine\Stream-Engine\Lib\Debug\Minigin.lib
+  E:\Prog 4\Stream-Engine\Stream-Engine\Stream-Engine\3rdParty\SDL2\lib\x86\SDL2.dll
+  1 File(s) copied
+  E:\Prog 4\Stream-Engine\Stream-Engine\Stream-Engine\3rdParty\SDL2_image\lib\x86\libjpeg-9.dll
+  E:\Prog 4\Stream-Engine\Stream-Engine\Stream-Engine\3rdParty\SDL2_image\lib\x86\libpng16-16.dll
+  E:\Prog 4\Stream-Engine\Stream-Engine\Stream-Engine\3rdParty\SDL2_image\lib\x86\libtiff-5.dll
+  E:\Prog 4\Stream-Engine\Stream-Engine\Stream-Engine\3rdParty\SDL2_image\lib\x86\libwebp-7.dll
+  E:\Prog 4\Stream-Engine\Stream-Engine\Stream-Engine\3rdParty\SDL2_image\lib\x86\SDL2_image.dll
+  E:\Prog 4\Stream-Engine\Stream-Engine\Stream-Engine\3rdParty\SDL2_image\lib\x86\zlib1.dll
+  6 File(s) copied
+  E:\Prog 4\Stream-Engine\Stream-Engine\Stream-Engine\3rdParty\SDL2_ttf\lib\x86\libfreetype-6.dll
+  E:\Prog 4\Stream-Engine\Stream-Engine\Stream-Engine\3rdParty\SDL2_ttf\lib\x86\SDL2_ttf.dll
+  2 File(s) copied

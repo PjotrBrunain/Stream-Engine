@@ -1,0 +1,5 @@
+﻿  QBert.cpp
+     Creating library ..\Build\Debug\QBert.lib and object ..\Build\Debug\QBert.exp
+QBert.obj : error LNK2019: unresolved external symbol "public: void __cdecl StreamEngine::Minigin::Run(void)" (?Run@Minigin@StreamEngine@@QEAAXXZ) referenced in function SDL_main
+MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
+..\Build\Debug\QBert.exe : fatal error LNK1120: 2 unresolved externals
