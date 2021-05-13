@@ -349,5 +349,4 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
-Minigin/
 Stream-Engine/Stream-Engine/.vs/

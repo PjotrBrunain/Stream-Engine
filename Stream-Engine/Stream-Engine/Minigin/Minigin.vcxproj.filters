@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{49bea25b-9836-404c-98ab-94e9e3f475dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{2b702429-a706-4e6e-97dc-145f0b5a2921}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SDL">
+      <UniqueIdentifier>{2e5595b5-e66e-4af8-afaa-3ec93a367670}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TextureComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture2D.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream-Engine.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniginPCH.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TextComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCommand.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TextureComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>SDL</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>SDL</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture2D.cpp">
+      <Filter>SDL</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream-Engine.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniginPCH.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TextComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="FPSComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
