@@ -56,5 +56,14 @@ void testLoadFunction()
 
 	scene.Add(fpsCounter);
 
-	/*StreamEngine::InputManager::GetInstance().SetCommand(StreamEngine::FlexibleCommand{ std::make_shared<StreamEngine::TestCommand>(), true, StreamEngine::ControllerButton::ButtonA });*/
+
+	StreamEngine::SceneManager::GetInstance().SetActiveScene("Demo");
+}
+
+void LoadQbert()
+{
+	auto& scene1 = StreamEngine::SceneManager::GetInstance().CreateScene("Level1");
+	{
+		std::shared_ptr<StreamEngine::GameObject> GameBoard{ std::make_shared<StreamEngine::GameObject>("GameBoard") };
+	}
 }

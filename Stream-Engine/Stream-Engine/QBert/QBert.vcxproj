@@ -173,9 +173,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameBoardComponent.cpp" />
     <ClCompile Include="QBert.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameBoardComponent.h" />
     <ClInclude Include="LoadFunction.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

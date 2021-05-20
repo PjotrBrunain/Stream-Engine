@@ -5,12 +5,12 @@ namespace StreamEngine
 {
 	class Texture2D;
 	class BaseComponent;
-	class GameObject final : std::enable_shared_from_this<GameObject>
+	class GameObject : std::enable_shared_from_this<GameObject>
 	{
 	public:
-		void Update(float deltaTime);
-		void FixedUpdate(float deltaTime);
-		void LateUpdate(float deltaTime);
+		virtual void Update(float deltaTime);
+		virtual void FixedUpdate(float deltaTime);
+		virtual void LateUpdate(float deltaTime);
 
 		void AddComponent(std::shared_ptr<BaseComponent> pComponent);
 		template <typename T>
@@ -30,18 +30,19 @@ namespace StreamEngine
 
 		Transform& GetTransform();
 
-		void Render();
+		virtual void Render();
 
 		bool IsVisual() const;
 
 		GameObject() = default;
-		~GameObject();
+		GameObject(std::string name);
+		virtual ~GameObject();
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
 
-	private:
+	protected:
 		std::vector<std::shared_ptr<BaseComponent>> m_pComponents{};
 		std::vector<std::shared_ptr<GameObject>> m_pChildObjects{};
 		bool m_IsVisual{};

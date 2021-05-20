@@ -19,6 +19,11 @@ bool StreamEngine::GameObject::IsVisual() const
 	return m_IsVisual;
 }
 
+StreamEngine::GameObject::GameObject(std::string name)
+	:m_Name(name)
+{
+}
+
 StreamEngine::GameObject::~GameObject() = default;
 
 void StreamEngine::GameObject::Update(float deltaTime)
