@@ -1,4 +1,6 @@
 #pragma once
+#include <unordered_map>
+
 #include "Singleton.h"
 
 namespace StreamEngine
@@ -13,9 +15,13 @@ namespace StreamEngine
 		void FixedUpdate(const float deltaTime);
 		void LateUpdate(const float deltaTime);
 		void Render();
+
+		void SetActiveScene(std::string name);
 	private:
 		friend class Singleton<SceneManager>;
 		SceneManager() = default;
-		std::vector<std::shared_ptr<Scene>> m_Scenes;
+		std::unordered_map<std::string, std::shared_ptr<Scene>> m_Scenes;
+
+		std::string m_CurrentScene;
 	};
 }

@@ -4,10 +4,11 @@
 
 #include "SDL.h"
 #include "Stream-Engine.h"
+#include "LoadFunction.h"
 
 int main(int, char*[])
 {
     StreamEngine::Streamgin engine{};
-	engine.Run();
+	engine.Run(testLoadFunction);
 	return 0;
 }

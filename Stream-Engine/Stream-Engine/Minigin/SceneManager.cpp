@@ -4,39 +4,32 @@
 
 void StreamEngine::SceneManager::Update(const float deltaTime)
 {
-	for(auto& scene : m_Scenes)
-	{
-		scene->Update(deltaTime);
-	}
+	m_Scenes[m_CurrentScene]->Update(deltaTime);
 }
 
 void StreamEngine::SceneManager::FixedUpdate(const float deltaTime)
 {
-	for (auto& scene : m_Scenes)
-	{
-		scene->FixedUpdate(deltaTime);
-	}
+	m_Scenes[m_CurrentScene]->FixedUpdate(deltaTime);
 }
 
 void StreamEngine::SceneManager::LateUpdate(const float deltaTime)
 {
-	for (auto& scene : m_Scenes)
-	{
-		scene->LateUpdate(deltaTime);
-	}
+	m_Scenes[m_CurrentScene]->LateUpdate(deltaTime);
 }
 
 void StreamEngine::SceneManager::Render()
 {
-	for (const auto& scene : m_Scenes)
-	{
-		scene->Render();
-	}
+	m_Scenes[m_CurrentScene]->Render();
+}
+
+void StreamEngine::SceneManager::SetActiveScene(std::string name)
+{
+	m_CurrentScene = name;
 }
 
 StreamEngine::Scene& StreamEngine::SceneManager::CreateScene(const std::string& name)
 {
 	const auto scene = std::shared_ptr<Scene>(std::make_shared<Scene>(name));
-	m_Scenes.push_back(scene);
+	m_Scenes.insert(std::make_pair(name, scene));
 	return *scene.get();
 }

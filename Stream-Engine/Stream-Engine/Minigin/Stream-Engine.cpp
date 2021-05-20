@@ -44,53 +44,54 @@ void StreamEngine::Streamgin::Initialize()
 /**
  * Code constructing the scene world starts here
  */
-void StreamEngine::Streamgin::LoadGame() const
+void StreamEngine::Streamgin::LoadGame(const std::function<void()>& loadFunction) const
 {
-	auto& scene = SceneManager::GetInstance().CreateScene("Demo");
+	loadFunction();
+	//auto& scene = SceneManager::GetInstance().CreateScene("Demo");
 
-	shared_ptr<GameObject> background{ std::make_shared<GameObject>() };
+	//shared_ptr<GameObject> background{ std::make_shared<GameObject>() };
 
-	background->AddComponent(std::make_shared<TextureComponent>("background.jpg", background));
+	//background->AddComponent(std::make_shared<TextureComponent>("background.jpg", background));
 
-	scene.Add(background);
+	//scene.Add(background);
 
-	shared_ptr<GameObject> logo{ std::make_shared<GameObject>() };
+	//shared_ptr<GameObject> logo{ std::make_shared<GameObject>() };
 
-	logo->AddComponent(std::make_shared<TextureComponent>("logo.png", logo));
-	logo->GetTransform().SetPosition(216, 180, 0);
+	//logo->AddComponent(std::make_shared<TextureComponent>("logo.png", logo));
+	//logo->GetTransform().SetPosition(216, 180, 0);
 
-	scene.Add(logo);
+	//scene.Add(logo);
 
-	shared_ptr<GameObject> text{ std::make_shared<GameObject>() };
+	//shared_ptr<GameObject> text{ std::make_shared<GameObject>() };
 
-	text->AddComponent(std::make_shared<TextComponent>("Lingua.otf", text));
+	//text->AddComponent(std::make_shared<TextComponent>("Lingua.otf", text));
 
-	text->GetTransform().SetPosition(80, 20, 0);
+	//text->GetTransform().SetPosition(80, 20, 0);
 
-	text->GetComponent<TextComponent>()->SetText("Programming 4 Assignment");
+	//text->GetComponent<TextComponent>()->SetText("Programming 4 Assignment");
 
-	text->GetComponent<TextComponent>()->SetSize(36);
+	//text->GetComponent<TextComponent>()->SetSize(36);
 
-	scene.Add(text);
+	//scene.Add(text);
 
 
-	shared_ptr<GameObject> fpsCounter{ std::make_shared<GameObject>() };
+	//shared_ptr<GameObject> fpsCounter{ std::make_shared<GameObject>() };
 
-	std::shared_ptr<TextComponent> pTxtComponent{ std::make_shared<TextComponent>("Lingua.otf",fpsCounter) };
-	pTxtComponent->SetSize(26);
-	pTxtComponent->SetColor({ 0,255,0,255 });
-	const std::shared_ptr<FPSComponent> pFPSComponent{ std::make_shared<FPSComponent>(fpsCounter) };
-	pTxtComponent->LinkText(pFPSComponent->GetTextLink());
-	pTxtComponent->SetDoUpdate(true);
+	//std::shared_ptr<TextComponent> pTxtComponent{ std::make_shared<TextComponent>("Lingua.otf",fpsCounter) };
+	//pTxtComponent->SetSize(26);
+	//pTxtComponent->SetColor({ 0,255,0,255 });
+	//const std::shared_ptr<FPSComponent> pFPSComponent{ std::make_shared<FPSComponent>(fpsCounter) };
+	//pTxtComponent->LinkText(pFPSComponent->GetTextLink());
+	//pTxtComponent->SetDoUpdate(true);
 
-	fpsCounter->AddComponent(pTxtComponent);
-	fpsCounter->AddComponent(pFPSComponent);
+	//fpsCounter->AddComponent(pTxtComponent);
+	//fpsCounter->AddComponent(pFPSComponent);
 
-	fpsCounter->GetTransform().SetPosition(0, 0, 0);
+	//fpsCounter->GetTransform().SetPosition(0, 0, 0);
 
-	scene.Add(fpsCounter);
+	//scene.Add(fpsCounter);
 
-	InputManager::GetInstance().SetCommand(FlexibleCommand{ std::make_shared<TestCommand>(), true, ControllerButton::ButtonA });
+	//InputManager::GetInstance().SetCommand(FlexibleCommand{ std::make_shared<TestCommand>(), true, ControllerButton::ButtonA });
 	
 	//auto go = std::make_shared<StreamEngine::GameObject>();
 	//go->SetTexture("background.jpg");
@@ -115,14 +116,14 @@ void StreamEngine::Streamgin::Cleanup()
 	SDL_Quit();
 }
 
-void StreamEngine::Streamgin::Run()
+void StreamEngine::Streamgin::Run(const std::function<void()>& loadFunction)
 {
 	Initialize();
 
 	// tell the resource manager where he can find the game data
 	ResourceManager::GetInstance().Init("../Data/");
 
-	LoadGame();
+	LoadGame(loadFunction);
 
 	{
 		auto& renderer = Renderer::GetInstance();

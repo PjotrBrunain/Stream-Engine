@@ -175,6 +175,9 @@
   <ItemGroup>
     <ClCompile Include="QBert.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LoadFunction.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
