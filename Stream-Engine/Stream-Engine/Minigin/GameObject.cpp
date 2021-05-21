@@ -19,6 +19,11 @@ bool StreamEngine::GameObject::IsVisual() const
 	return m_IsVisual;
 }
 
+void StreamEngine::GameObject::AddChild(const std::shared_ptr<GameObject>& pChild)
+{
+	m_pChildObjects.push_back(pChild);
+}
+
 StreamEngine::GameObject::GameObject(std::string name)
 	:m_Name(name)
 {

@@ -2,6 +2,7 @@
 #include "MiniginPCH.h"
 
 #include "FPSComponent.h"
+#include "GameBoardComponent.h"
 #include "InputManager.h"
 #include "SceneManager.h"
 #include "TestCommand.h"
@@ -64,6 +65,6 @@ void LoadQbert()
 {
 	auto& scene1 = StreamEngine::SceneManager::GetInstance().CreateScene("Level1");
 	{
-		std::shared_ptr<StreamEngine::GameObject> GameBoard{ std::make_shared<StreamEngine::GameObject>("GameBoard") };
+		std::shared_ptr<StreamEngine::GameObject> GameBoard{ std::make_shared<GameBoardObject>(7,7) };
 	}
 }

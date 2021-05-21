@@ -1,6 +1,5 @@
 #pragma once
 #include <memory>
-#include <vector>
 #include "GameObject.h"
 
 class GameBoardObject final : public StreamEngine::GameObject
@@ -14,13 +13,14 @@ public:
 	GameBoardObject& operator=(const GameBoardObject&) = delete;
 	GameBoardObject& operator=(GameBoardObject&&) noexcept = delete;
 	
-	virtual ~GameBoardObject() = default;
-	
-	void Update(float deltaTime) override;
-	void Render() override;
+	~GameBoardObject() override = default;
+
+	void AddChild(const std::shared_ptr<GameObject>& pChild, int row, int column);
+
+	int GetNrOfRows() const;
+	int GetNrOfColumns() const;
 
 private:
 	int m_Rows;
 	int m_Columns;
 };
-

@@ -1,5 +1,6 @@
 #pragma once
 #include "Transform.h"
+#include <vector>
 
 namespace StreamEngine
 {
@@ -33,6 +34,8 @@ namespace StreamEngine
 		virtual void Render();
 
 		bool IsVisual() const;
+
+		virtual void AddChild(const std::shared_ptr<GameObject>& pChild);
 
 		GameObject() = default;
 		GameObject(std::string name);
