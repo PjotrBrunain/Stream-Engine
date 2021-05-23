@@ -2,7 +2,7 @@
 #include "MiniginPCH.h"
 
 #include "FPSComponent.h"
-#include "GameBoardComponent.h"
+#include "GameBoardObject.h"
 #include "InputManager.h"
 #include "SceneManager.h"
 #include "TestCommand.h"
@@ -63,8 +63,10 @@ void testLoadFunction()
 
 void LoadQbert()
 {
-	auto& scene1 = StreamEngine::SceneManager::GetInstance().CreateScene("Level1");
+	auto& sceneLevel1 = StreamEngine::SceneManager::GetInstance().CreateScene("Level1");
 	{
-		std::shared_ptr<StreamEngine::GameObject> GameBoard{ std::make_shared<GameBoardObject>(7,7) };
+		std::shared_ptr<GameBoardObject> pGameBoard{ std::make_shared<GameBoardObject>(7,7) };
+		sceneLevel1.Add(pGameBoard);
+		
 	}
 }

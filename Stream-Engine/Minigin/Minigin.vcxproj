@@ -87,7 +87,7 @@
     <IntDir>$(Configuration)\</IntDir>
     <ReferencePath>$(ReferencePath)</ReferencePath>
     <IncludePath>$(SolutionDir);$(IncludePath)</IncludePath>
-    <OutDir>$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)Lib\$(Configuration)</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>

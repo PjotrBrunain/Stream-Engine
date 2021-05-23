@@ -1,4 +1,4 @@
-#include "GameBoardComponent.h"
+#include "GameBoardObject.h"
 
 GameBoardObject::GameBoardObject(int rows, int columns)
 		:GameObject(),
