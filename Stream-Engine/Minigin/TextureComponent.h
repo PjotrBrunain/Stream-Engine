@@ -16,7 +16,7 @@ namespace StreamEngine
 		//void FixedUpdate(float deltaTime) override;
 		//void LateUpdate(float deltaTime) override;
 
-		void Render() override;
+		void Render() const override;
 
 		TextureComponent(const TextureComponent&) = delete;
 		TextureComponent(TextureComponent&&) noexcept = delete;

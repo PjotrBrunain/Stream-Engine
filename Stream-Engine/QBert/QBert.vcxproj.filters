@@ -26,6 +26,9 @@
     <ClCompile Include="SpriteTextureComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="GameTileObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LoadFunction.h">
@@ -36,6 +39,9 @@
     </ClInclude>
     <ClInclude Include="SpriteTextureComponent.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTileObject.h">
+      <Filter>GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

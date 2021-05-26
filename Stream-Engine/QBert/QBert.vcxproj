@@ -174,11 +174,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameBoardObject.cpp" />
+    <ClCompile Include="GameTileObject.cpp" />
     <ClCompile Include="QBert.cpp" />
     <ClCompile Include="SpriteTextureComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameBoardObject.h" />
+    <ClInclude Include="GameTileObject.h" />
     <ClInclude Include="LoadFunction.h" />
     <ClInclude Include="SpriteTextureComponent.h" />
   </ItemGroup>

@@ -14,7 +14,7 @@ namespace StreamEngine
 		TextComponent(const std::string& fontPath, std::weak_ptr<GameObject> pOwningGameObject);
 		virtual ~TextComponent();
 
-		void Render() override;
+		void Render() const override;
 		void Update(float deltaTime) override;
 
 		void SetText(const std::string& text);

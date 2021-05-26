@@ -23,7 +23,7 @@ StreamEngine::TextureComponent::~TextureComponent()
 #endif
 }
 
-void StreamEngine::TextureComponent::Render()
+void StreamEngine::TextureComponent::Render() const
 {
 	Renderer::GetInstance().RenderTexture(*m_pTexture.get(), m_pOwningGameObject.lock()->GetTransform().GetPosition().x, m_pOwningGameObject.lock()->GetTransform().GetPosition().y);
 }

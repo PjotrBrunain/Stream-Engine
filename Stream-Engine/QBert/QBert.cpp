@@ -9,6 +9,6 @@
 int main(int, char*[])
 {
     StreamEngine::Streamgin engine{};
-	engine.Run(testLoadFunction);
+	engine.Run(LoadQbert);
 	return 0;
 }

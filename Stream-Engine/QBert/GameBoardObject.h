@@ -6,7 +6,7 @@ class GameBoardObject final : public StreamEngine::GameObject
 {
 public:
 
-	GameBoardObject(int rows, int columns);
+	GameBoardObject(int rows, int columns, float posX, float posY, float height, float width);
 
 	GameBoardObject(const GameBoardObject&) = delete;
 	GameBoardObject(GameBoardObject&&) noexcept = delete;
@@ -23,4 +23,5 @@ public:
 private:
 	int m_Rows;
 	int m_Columns;
+	float m_HexSize;
 };

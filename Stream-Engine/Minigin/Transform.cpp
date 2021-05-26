@@ -16,3 +16,13 @@ void StreamEngine::Transform::SetPosition(const float x, const float y, const fl
 	m_Position.y = y;
 	m_Position.z = z;
 }
+
+void StreamEngine::Transform::SetHeight(const float height)
+{
+	m_Height = height;
+}
+
+void StreamEngine::Transform::SetWidth(const float width)
+{
+	m_Width = width;
+}

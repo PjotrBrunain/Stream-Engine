@@ -1,5 +1,6 @@
 #pragma once
 #include <BaseComponent.h>
+#include <map>
 #include <memory>
 #include <string>
 
@@ -16,9 +17,9 @@ public:
 	SpriteTextureComponent& operator=(SpriteTextureComponent&&) noexcept = delete;
 	
 	~SpriteTextureComponent() override = default;
-	void Render(int bottom, int left, int height, int width);
+	void Render(int bottom, int left, int height, int width) const override;
 
 private:
-	std::shared_ptr<StreamEngine::Texture2D> m_pTexture;
+	static std::map<std::string, std::shared_ptr<StreamEngine::Texture2D>> m_pTextures;
+	std::string m_Path;
 };
-

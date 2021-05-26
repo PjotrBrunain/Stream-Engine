@@ -1,0 +1,184 @@
+{
+	"tiles": [
+	{
+		"row": 6,
+		"column": 0
+		"srcRect": {
+			"bottom": 160,
+			"left": 0,
+			"width": 32,
+			"height": 32
+		}
+	},
+	{
+		"row": 6,
+		"column": 1
+		"srcRect": {
+			"bottom": 160,
+			"left": 0,
+			"width": 32,
+			"height": 32
+		}
+	},
+	{
+		"row": 6,
+		"column": 2
+		"srcRect": {
+			"bottom": 160,
+			"left": 0,
+			"width": 32,
+			"height": 32
+		}
+	},
+	{
+		"row": 6,
+		"column": 3
+		"srcRect": {
+			"bottom": 160,
+			"left": 0,
+			"width": 32,
+			"height": 32
+		}
+	},
+	{
+		"row": 6,
+		"column": 4
+		"srcRect": {
+			"bottom": 160,
+			"left": 0,
+			"width": 32,
+			"height": 32
+		}
+	},
+	{
+		"row": 6,
+		"column": 5
+		"srcRect": {
+			"bottom": 160,
+			"left": 0,
+			"width": 32,
+			"height": 32
+		}
+	},
+	{
+		"row": 6,
+		"column": 6
+		"srcRect": {
+			"bottom": 160,
+			"left": 0,
+			"width": 32,
+			"height": 32
+		}
+	},
+	{
+		"row": 5,
+		"column": 0
+		"srcRect": {
+			"bottom": 160,
+			"left": 0,
+			"width": 32,
+			"height": 32
+		}
+	},
+	{
+		"row": 5,
+		"column": 1
+		"srcRect": {
+			"bottom": 160,
+			"left": 0,
+			"width": 32,
+			"height": 32
+		}
+	},
+	{
+		"row": 5,
+		"column": 2
+		"srcRect": {
+			"bottom": 160,
+			"left": 0,
+			"width": 32,
+			"height": 32
+		}
+	},
+	{
+		"row": 5,
+		"column": 3
+		"srcRect": {
+			"bottom": 160,
+			"left": 0,
+			"width": 32,
+			"height": 32
+		}
+	},
+	{
+		"row": 5,
+		"column": 4
+		"srcRect": {
+			"bottom": 160,
+			"left": 0,
+			"width": 32,
+			"height": 32
+		}
+	},
+	{
+		"row": 5,
+		"column": 5
+		"srcRect": {
+			"bottom": 160,
+			"left": 0,
+			"width": 32,
+			"height": 32
+		}
+	},
+	{
+		"row": 4,
+		"column": 1
+		"srcRect": {
+			"bottom": 160,
+			"left": 0,
+			"width": 32,
+			"height": 32
+		}
+	},
+	{
+		"row": 4,
+		"column": 2
+		"srcRect": {
+			"bottom": 160,
+			"left": 0,
+			"width": 32,
+			"height": 32
+		}
+	},
+	{
+		"row": 4,
+		"column": 3
+		"srcRect": {
+			"bottom": 160,
+			"left": 0,
+			"width": 32,
+			"height": 32
+		}
+	},
+	{
+		"row": 4,
+		"column": 4
+		"srcRect": {
+			"bottom": 160,
+			"left": 0,
+			"width": 32,
+			"height": 32
+		}
+	},
+	{
+		"row": 4,
+		"column": 5
+		"srcRect": {
+			"bottom": 160,
+			"left": 0,
+			"width": 32,
+			"height": 32
+		}
+	},
+	]
+}

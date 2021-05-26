@@ -22,11 +22,13 @@ namespace StreamEngine
 		const glm::vec3& GetPosition() const { return m_Position; }
 		void SetPosition(float x, float y, float z);
 
-		//void Update(float deltaTime) override {};
-		//void FixedUpdate(float deltaTime) override {};
-		//void LateUpdate(float deltaTime) override {}
-		void Render() override {};;
+		void SetHeight(const float height);
+		void SetWidth(const float width);
+		float GetHeight() const { return m_Height; }
+		float GetWidth() const { return m_Width; }
 	private:
 		glm::vec3 m_Position;
+		float m_Height;
+		float m_Width;
 	};
 }

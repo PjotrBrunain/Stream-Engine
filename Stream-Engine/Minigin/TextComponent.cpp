@@ -38,7 +38,7 @@ StreamEngine::TextComponent::~TextComponent()
 {
 }
 
-void StreamEngine::TextComponent::Render()
+void StreamEngine::TextComponent::Render() const
 {
 	Renderer::GetInstance().RenderTexture(*m_pTexture.get(), m_pOwningGameObject.lock()->GetTransform().GetPosition().x, m_pOwningGameObject.lock()->GetTransform().GetPosition().y);
 }
