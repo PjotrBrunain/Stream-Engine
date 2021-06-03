@@ -17,6 +17,8 @@ namespace StreamEngine
 		void LateUpdate(float deltaTime);
 		void Render() const;
 
+		std::shared_ptr<GameObject> GetObjectByName(std::string name) const;
+
 		~Scene();
 		Scene(const Scene& other) = delete;
 		Scene(Scene&& other) = delete;

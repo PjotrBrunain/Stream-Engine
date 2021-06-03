@@ -15,6 +15,9 @@
     <Filter Include="GameObjects">
       <UniqueIdentifier>{881a9c86-a501-455b-af99-d851aca9ae70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Commands">
+      <UniqueIdentifier>{6f943d67-e269-4fbb-a290-c9c25ca2c4ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="QBert.cpp">
@@ -28,6 +31,15 @@
     </ClCompile>
     <ClCompile Include="GameTileObject.cpp">
       <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="TeleportObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="QbertObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveDown.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -43,5 +55,15 @@
     <ClInclude Include="GameTileObject.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="Structs.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TeleportObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="QbertObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveDown.h" />
   </ItemGroup>
 </Project>

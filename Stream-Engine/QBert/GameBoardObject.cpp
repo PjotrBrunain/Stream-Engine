@@ -35,6 +35,26 @@ void GameBoardObject::AddChild(const std::shared_ptr<GameObject>& pChild, int ro
 	pChild->GetTransform().SetWidth(w);
 }
 
+const glm::vec3& GameBoardObject::GetTilePosition(int row, int column) const
+{
+	return m_pChildObjects[row * m_Columns + column]->GetTransform().GetPosition();
+}
+
+float GameBoardObject::GetHexSize() const
+{
+	return m_HexSize;
+}
+
+float GameBoardObject::GetTileHeight(int row, int column) const
+{
+	return m_pChildObjects[row * m_Columns + column]->GetTransform().GetHeight();
+}
+
+float GameBoardObject::GetTileWidth(int row, int column) const
+{
+	return m_pChildObjects[row * m_Columns + column]->GetTransform().GetWidth();
+}
+
 int GameBoardObject::GetNrOfRows() const
 {
 	return m_Rows;

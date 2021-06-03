@@ -8,65 +8,72 @@ bool StreamEngine::InputManager::ProcessInput()
 {
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
-		if (e.type == SDL_QUIT) {
+		if (e.type == SDL_QUIT) 
+		{
 			return false;
 		}
-		if (e.type == SDL_KEYDOWN) {
-
+		if (e.type == SDL_KEYDOWN) 
+		{	
 		}
-		if (e.type == SDL_MOUSEBUTTONDOWN) {
-
+		if (e.type == SDL_MOUSEBUTTONDOWN)
+		{
 		}
+		
 	}
 
-	
-	ZeroMemory(&m_CurrentState, sizeof(XINPUT_STATE));
-	const DWORD dwResult = XInputGetState(0, &m_CurrentState);
-	if (dwResult == ERROR_SUCCESS)
+	for (int i = 0; i < m_AmountOfPlayers; ++i)
 	{
-		if (m_CurrentState.Gamepad.wButtons != m_LastButtons)
+		ZeroMemory(&m_CurrentState, sizeof(XINPUT_STATE));
+		const DWORD dwResult = XInputGetState(0, &m_CurrentState);
+		if (dwResult == ERROR_SUCCESS)
 		{
-			auto buttonLambda = [this](const FlexibleCommand& button, const ControllerButton& controllerButton)
+			if (m_CurrentState.Gamepad.wButtons != m_LastButtons)
 			{
-				if (button.OnRelease)
+				auto buttonLambda = [this](const FlexibleCommand& button)
 				{
-					if ((m_LastButtons & DWORD(controllerButton)) == DWORD(controllerButton) && !IsPressed(controllerButton))
+					if (button.OnRelease)
 					{
-						if (button.pCommand != nullptr)
+						if ((m_LastButtons & DWORD(button.ControllerButton)) == DWORD(button.ControllerButton) && !IsPressed(button.ControllerButton))
 						{
-							button.pCommand->Execute();
+							if (button.pCommand != nullptr)
+							{
+								button.pCommand->Execute();
+							}
 						}
 					}
-				}
-				else
-				{
-					if (IsPressed(controllerButton))
+					else
 					{
-						if (button.pCommand != nullptr)
+						if (IsPressed(button.ControllerButton))
 						{
-							button.pCommand->Execute();
+							if (button.pCommand != nullptr)
+							{
+								button.pCommand->Execute();
+							}
 						}
 					}
-				}
-			};
+				};
 
-			for (const FlexibleCommand& flexiCommand : m_Commands)
-			{
-				buttonLambda(flexiCommand, flexiCommand.Button);
+				for (const FlexibleCommand& flexiCommand : m_Commands)
+				{
+					if (flexiCommand.ControllerId == i)
+					{
+						buttonLambda(flexiCommand);
+					}
+				}
+
+				//for (int i = 0; i < m_Commands.size(); ++i)
+				//{
+				//	buttonLambda(m_Commands[i], m_Commands[i].Button);
+				//}
+				m_LastButtons = m_CurrentState.Gamepad.wButtons;
 			}
-			
-			//for (int i = 0; i < m_Commands.size(); ++i)
-			//{
-			//	buttonLambda(m_Commands[i], m_Commands[i].Button);
-			//}
-			m_LastButtons = m_CurrentState.Gamepad.wButtons;
 		}
 	}
 
 	return true;
 }
 
-bool StreamEngine::InputManager::IsPressed(ControllerButton button) const
+bool StreamEngine::InputManager::IsPressed(const DWORD& button) const
 {
 	//switch (button)
 	//{
@@ -92,11 +99,16 @@ bool StreamEngine::InputManager::IsPressed(ControllerButton button) const
 	//	return m_CurrentState.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT;
 	//default: return false;
 	//}
-	return m_CurrentState.Gamepad.wButtons & DWORD(button);
+	return m_CurrentState.Gamepad.wButtons & button;
 }
 
 void StreamEngine::InputManager::SetCommand(const FlexibleCommand& command)
 {
 	m_Commands.push_back(command);
+}
+
+void StreamEngine::InputManager::SetAmountOfPlayers(int amountOfPlayers)
+{
+	m_AmountOfPlayers = amountOfPlayers;
 }
 

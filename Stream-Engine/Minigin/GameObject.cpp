@@ -24,6 +24,16 @@ void StreamEngine::GameObject::AddChild(const std::shared_ptr<GameObject>& pChil
 	m_pChildObjects.push_back(pChild);
 }
 
+std::string StreamEngine::GameObject::GetName() const
+{
+	return m_Name;
+}
+
+void StreamEngine::GameObject::SetName(const std::string& name)
+{
+	m_Name = name;
+}
+
 StreamEngine::GameObject::GameObject(std::string name)
 	:m_Name(name)
 {

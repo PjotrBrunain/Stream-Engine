@@ -5,38 +5,28 @@
 namespace StreamEngine
 {
 	class Command;
-	
-	enum class ControllerButton
-	{
-		ButtonA = XINPUT_GAMEPAD_A,
-		ButtonB = XINPUT_GAMEPAD_B,
-		ButtonX = XINPUT_GAMEPAD_X,
-		ButtonY = XINPUT_GAMEPAD_Y,
-		ButtonStart = XINPUT_GAMEPAD_START,
-		ButtonBack = XINPUT_GAMEPAD_BACK,
-		ButtonDpadUp = XINPUT_GAMEPAD_DPAD_UP,
-		ButtonDpadDown = XINPUT_GAMEPAD_DPAD_DOWN,
-		ButtonDpadLeft = XINPUT_GAMEPAD_DPAD_LEFT,
-		ButtonDpadRight = XINPUT_GAMEPAD_DPAD_RIGHT
-	};
 
 	struct FlexibleCommand
 	{
-		std::shared_ptr<Command> pCommand;
-		bool OnRelease;
-		ControllerButton Button;
+		std::shared_ptr<Command> pCommand{};
+		bool OnRelease{};
+		DWORD ControllerButton{};
+		int ControllerId{};
+		uint32_t KeyBoardButton{};
 	};
 	
 	class InputManager final : public Singleton<InputManager>
 	{
 	public:
 		bool ProcessInput();
-		bool IsPressed(ControllerButton button) const;
+		bool IsPressed(const DWORD& button) const;
 		void SetCommand(const FlexibleCommand& command);
+		void SetAmountOfPlayers(int amountOfPlayers);
 	private:
 		XINPUT_STATE m_CurrentState{};
 		std::vector<FlexibleCommand> m_Commands{};
 		WORD m_LastButtons{};
+		int m_AmountOfPlayers{ 1 };
 	};
 
 }

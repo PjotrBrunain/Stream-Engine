@@ -136,7 +136,7 @@ void StreamEngine::Streamgin::Run(const std::function<void()>& loadFunction)
 		while (doContinue)
 		{
 			const auto currentTime = high_resolution_clock::now();
-			const float deltaTime = duration<float, milli>(currentTime - lastTime).count();
+			const float deltaTime = duration<float, std::milli>(currentTime - lastTime).count();
 			lastTime = currentTime;
 			doContinue = input.ProcessInput();
 			sceneManager.Update(deltaTime);

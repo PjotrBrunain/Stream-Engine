@@ -7,7 +7,7 @@ namespace StreamEngine
 {
 	class Texture2D;
 	class BaseComponent;
-	class GameObject : std::enable_shared_from_this<GameObject>
+	class GameObject : public std::enable_shared_from_this<GameObject>
 	{
 	public:
 		virtual void Update(float deltaTime);
@@ -37,6 +37,9 @@ namespace StreamEngine
 		bool IsVisual() const;
 
 		virtual void AddChild(const std::shared_ptr<GameObject>& pChild);
+
+		std::string GetName() const;
+		void SetName(const std::string& name);
 
 		GameObject() = default;
 		GameObject(std::string name);

@@ -175,14 +175,21 @@
   <ItemGroup>
     <ClCompile Include="GameBoardObject.cpp" />
     <ClCompile Include="GameTileObject.cpp" />
+    <ClCompile Include="MoveDown.cpp" />
     <ClCompile Include="QBert.cpp" />
+    <ClCompile Include="QbertObject.cpp" />
     <ClCompile Include="SpriteTextureComponent.cpp" />
+    <ClCompile Include="TeleportObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameBoardObject.h" />
     <ClInclude Include="GameTileObject.h" />
     <ClInclude Include="LoadFunction.h" />
+    <ClInclude Include="MoveDown.h" />
+    <ClInclude Include="QbertObject.h" />
     <ClInclude Include="SpriteTextureComponent.h" />
+    <ClInclude Include="Structs.h" />
+    <ClInclude Include="TeleportObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

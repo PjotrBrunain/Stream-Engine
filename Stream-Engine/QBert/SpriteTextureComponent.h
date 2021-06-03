@@ -3,7 +3,11 @@
 #include <map>
 #include <memory>
 #include <string>
+#include <vector>
 
+
+
+#include "Structs.h"
 #include "Texture2D.h"
 
 class SpriteTextureComponent final : public StreamEngine::BaseComponent
@@ -17,9 +21,15 @@ public:
 	SpriteTextureComponent& operator=(SpriteTextureComponent&&) noexcept = delete;
 	
 	~SpriteTextureComponent() override = default;
-	void Render(int bottom, int left, int height, int width) const override;
+	void Render() const override;
+
+	void SetSrcRect(int srcRectIdx);
+	void AddSrcRect(const Rect& srcRect);
 
 private:
 	static std::map<std::string, std::shared_ptr<StreamEngine::Texture2D>> m_pTextures;
 	std::string m_Path;
+
+	std::vector<Rect> m_SrcRects;
+	int m_CurrentSrcRectIdx;
 };

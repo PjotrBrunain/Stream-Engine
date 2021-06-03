@@ -50,3 +50,16 @@ void Scene::Render() const
 	}
 }
 
+std::shared_ptr<GameObject> Scene::GetObjectByName(std::string name) const
+{
+	for (std::shared_ptr<GameObject> pObject : m_Objects)
+	{
+		if (pObject->GetName() == name)
+		{
+			return pObject;
+		}
+	}
+
+	return nullptr;
+}
+

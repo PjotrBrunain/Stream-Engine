@@ -17,6 +17,11 @@ public:
 
 	void AddChild(const std::shared_ptr<GameObject>& pChild, int row, int column);
 
+	const glm::vec3& GetTilePosition(int row, int column) const;
+	float GetHexSize() const;
+	float GetTileHeight(int row, int column) const;
+	float GetTileWidth(int row, int column) const;
+
 	int GetNrOfRows() const;
 	int GetNrOfColumns() const;
 
