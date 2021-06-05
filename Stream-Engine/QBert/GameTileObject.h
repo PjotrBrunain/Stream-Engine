@@ -8,6 +8,11 @@ class GameTileObject final : public StreamEngine::GameObject
 public:
 	//void Update(float deltaTime) override;
 
+	void UpgradeTile();
+	void DegradeTile();
+
+	bool IsMaxLevel();
+
 private:
 };
 

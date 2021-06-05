@@ -23,13 +23,19 @@ public:
 	~SpriteTextureComponent() override = default;
 	void Render() const override;
 
-	void SetSrcRect(int srcRectIdx);
+	void SetSrcRectIdx(int srcRectIdx);
+	unsigned int GetCurrentSrcRectIdx() const;
 	void AddSrcRect(const Rect& srcRect);
+
+	unsigned int GetSrcRectVecLength() const;
+
+	void operator++();
+	void operator--();
 
 private:
 	static std::map<std::string, std::shared_ptr<StreamEngine::Texture2D>> m_pTextures;
 	std::string m_Path;
 
 	std::vector<Rect> m_SrcRects;
-	int m_CurrentSrcRectIdx;
+	unsigned int m_CurrentSrcRectIdx;
 };

@@ -1,4 +1,5 @@
 #include "GameBoardObject.h"
+#include "GameTileObject.h"
 
 GameBoardObject::GameBoardObject(int rows, int columns, float posX, float posY, float height, float width)
 	:GameObject(),
@@ -63,4 +64,51 @@ int GameBoardObject::GetNrOfRows() const
 int GameBoardObject::GetNrOfColumns() const
 {
 	return m_Columns;
+}
+
+bool GameBoardObject::IsOnPlayboard(int row, int column)
+{
+	int idx{ row * m_Columns + column };
+	if (idx >= int(m_pChildObjects.size()) || idx < 0) return false;
+
+	if (m_pChildObjects[idx] == nullptr) return false;
+
+	return true;
+}
+
+const std::shared_ptr<StreamEngine::GameObject>& GameBoardObject::GetGameTile(int row, int column)
+{
+	return m_pChildObjects[row * m_Columns + column];
+}
+
+bool GameBoardObject::CheckWin() const
+{
+	bool hasWon{true};
+	for (std::shared_ptr<GameObject> PChildObject : m_pChildObjects)
+	{
+		std::shared_ptr<GameTileObject> pGameTile{ std::dynamic_pointer_cast<GameTileObject>(PChildObject) };
+		if (pGameTile != nullptr)
+		{
+			hasWon = hasWon && pGameTile->IsMaxLevel();
+		}
+	}
+	return hasWon;
+}
+
+float GameBoardObject::GetDistance(const OffsetTileCoords& coords1, const OffsetTileCoords& coords2)
+{
+	return CubeDistance(GetCubeCoords(coords1), GetCubeCoords(coords2));
+}
+
+CubeTileCoords GameBoardObject::GetCubeCoords(const OffsetTileCoords& coords)
+{
+	int x = coords.col - (coords.row - (coords.row & 1)) / 2;
+	int z = coords.row;
+	int y = -x - z;
+	return CubeTileCoords{ x,y,z };
+}
+
+float GameBoardObject::CubeDistance(const CubeTileCoords& a, const CubeTileCoords& b)
+{
+	return (abs(a.x - b.x) + abs(a.y - b.y) + abs(a.z - b.z)) / 2.f;
 }

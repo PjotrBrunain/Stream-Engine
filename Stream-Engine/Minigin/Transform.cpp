@@ -17,6 +17,11 @@ void StreamEngine::Transform::SetPosition(const float x, const float y, const fl
 	m_Position.z = z;
 }
 
+void StreamEngine::Transform::SetPosition(const glm::vec3& newPos)
+{
+	m_Position = newPos;
+}
+
 void StreamEngine::Transform::SetHeight(const float height)
 {
 	m_Height = height;

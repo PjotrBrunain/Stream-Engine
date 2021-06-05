@@ -1,26 +1,26 @@
-#include "MoveDown.h"
+#include "MoveUp.h"
 
 #include <utility>
 
 #include "GameTileObject.h"
 
-void MoveDown::Execute()
+void MoveUp::Execute()
 {
 	if (!m_pQbert->GetIsJumping())
 	{
 		int column = m_pQbert->GetColumn();
 		int row = m_pQbert->GetRow();
-		if (row % 2 == 0)
+		if (row % 2 == 1)
 		{
-			column--;
+			column++;
 		}
-		row++;
+		row--;
 		if (m_pGameBoard->IsOnPlayboard(row, column))
 		{
 			m_pQbert->SetRow(row);
 			m_pQbert->SetColumn(column);
 			m_pQbert->SetDestPos(glm::vec3{ m_pGameBoard->GetTilePosition(row, column).x + m_pGameBoard->GetTileWidth(row, column) / 4, m_pGameBoard->GetTilePosition(row, column).y - m_pGameBoard->GetHexSize() + m_pGameBoard->GetTileHeight(row, column) / 4, 1 });
-			m_pQbert->SetMoveDirection(Move::Down);
+			m_pQbert->SetMoveDirection(Move::Up);
 			m_pQbert->SetIsJumping(true);
 			std::shared_ptr<GameTileObject> pGameTileObject{ std::reinterpret_pointer_cast<GameTileObject>(m_pGameBoard->GetGameTile(row, column)) };
 			if (pGameTileObject != nullptr)
@@ -35,7 +35,7 @@ void MoveDown::Execute()
 	}
 }
 
-MoveDown::MoveDown(std::shared_ptr<QbertObject> pQbert, std::shared_ptr<GameBoardObject> pGameBoard)
+MoveUp::MoveUp(std::shared_ptr<QbertObject> pQbert, std::shared_ptr<GameBoardObject> pGameBoard)
 	:Command(),
 	m_pQbert(std::move(pQbert)),
 	m_pGameBoard(std::move(pGameBoard))

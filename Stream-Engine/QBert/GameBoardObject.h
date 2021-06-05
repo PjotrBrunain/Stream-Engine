@@ -1,6 +1,9 @@
 #pragma once
 #include <memory>
 #include "GameObject.h"
+#include "Structs.h"
+
+class GameTileObject;
 
 class GameBoardObject final : public StreamEngine::GameObject
 {
@@ -25,8 +28,17 @@ public:
 	int GetNrOfRows() const;
 	int GetNrOfColumns() const;
 
+	bool IsOnPlayboard(int row, int column);
+
+	const std::shared_ptr<StreamEngine::GameObject>& GetGameTile(int row, int column);
+	bool CheckWin() const;
+
+	static float GetDistance(const OffsetTileCoords& coords1, const OffsetTileCoords& coords2);
 private:
+	
 	int m_Rows;
 	int m_Columns;
 	float m_HexSize;
+	static CubeTileCoords GetCubeCoords(const OffsetTileCoords& coords);
+	static float CubeDistance(const CubeTileCoords& a, const CubeTileCoords& b);
 };

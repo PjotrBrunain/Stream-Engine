@@ -5,7 +5,7 @@
 
 class GameBoardObject;
 
-class QbertObject : public StreamEngine::GameObject
+class QbertObject final : public StreamEngine::GameObject
 {
 public:
 	QbertObject();
@@ -16,7 +16,21 @@ public:
 
 	void SetRow(int row);
 	void SetColumn(int column);
+
+	void SetMoveDirection(const Move& move);
+	void Update(float deltaTime) override;
+
+	void SetIsJumping(bool isJumping);
+	bool GetIsJumping() const;
+	void SetDestPos(const glm::vec3& destPos);
+	void Die(int row, int column, const std::shared_ptr<GameBoardObject>& pGameBoard);
 private:
 	int m_Column;
 	int m_Row;
+	Move m_CurrentMoveDirection;
+	bool m_IsJumping;
+	glm::vec3 m_DestPos;
+	float m_Speed;
+	float m_Delta;
+	int m_Lives;
 };

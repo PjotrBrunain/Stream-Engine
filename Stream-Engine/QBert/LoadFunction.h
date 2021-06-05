@@ -3,6 +3,8 @@
 
 #include <fstream>
 
+
+#include "CoilyObject.h"
 #include "FPSComponent.h"
 #include "GameBoardObject.h"
 #include "InputManager.h"
@@ -12,6 +14,10 @@
 #include "TextureComponent.h"
 #include "GameObject.h"
 #include "GameTileObject.h"
+#include "MoveDown.h"
+#include "MoveLeft.h"
+#include "MoveRight.h"
+#include "MoveUp.h"
 #include "QbertObject.h"
 #include "Scene.h"
 #include "SpriteTextureComponent.h"
@@ -176,21 +182,21 @@ inline void LoadQbert()
 	std::shared_ptr<GameTileObject> pGameTile{ std::make_shared<GameTileObject>() };
 	const std::shared_ptr<SpriteTextureComponent> pSpriteComponent{ std::make_shared<SpriteTextureComponent>("Arcade - QBert - General Sprites.png", pGameTile) };
 	pGameTile->AddComponent(pSpriteComponent);
-	pGameTile->SetSrcRect(Rect{ 320,0,32,32 });
+	pGameTile->SetSrcRectIdx(Rect{ 320,0,32,32 });
 	pGameBoard->AddChild(pGameTile, 5, 6);
 	sceneLevel1.Add(pGameTile);
 
 	std::shared_ptr<GameTileObject> pGameTile2{ std::make_shared<GameTileObject>() };
 	const std::shared_ptr<SpriteTextureComponent> pSpriteComponent2{ std::make_shared<SpriteTextureComponent>("Arcade - QBert - General Sprites.png", pGameTile2) };
 	pGameTile->AddComponent(pSpriteComponent2);
-	pGameTile->SetSrcRect(Rect{ 320,0,32,32 });
+	pGameTile->SetSrcRectIdx(Rect{ 320,0,32,32 });
 	pGameBoard->AddChild(pGameTile2, 5, 4);
 	sceneLevel1.Add(pGameTile2);
 
 	std::shared_ptr<GameTileObject> pGameTile3{ std::make_shared<GameTileObject>() };
 	const std::shared_ptr<SpriteTextureComponent> pSpriteComponent3{ std::make_shared<SpriteTextureComponent>("Arcade - QBert - General Sprites.png", pGameTile3) };
 	pGameTile->AddComponent(pSpriteComponent3);
-	pGameTile->SetSrcRect(Rect{ 320,0,32,32 });
+	pGameTile->SetSrcRectIdx(Rect{ 320,0,32,32 });
 	pGameBoard->AddChild(pGameTile3, 5, 5);
 	sceneLevel1.Add(pGameTile3);*/
 
@@ -215,17 +221,32 @@ inline void LoadQbert()
 	}
 
 	{
+		std::shared_ptr<GameBoardObject> pGameBoard{ std::reinterpret_pointer_cast<GameBoardObject>(sceneLevel1.GetObjectByName("GameBoard")) };
+
 		std::shared_ptr<QbertObject> pQbertObject{ std::make_shared<QbertObject>() };
-		pQbertObject->Init(0,3,std::reinterpret_pointer_cast<GameBoardObject>(sceneLevel1.GetObjectByName("GameBoard")));
+		pQbertObject->Init(0, 3, pGameBoard);
 		//pQbertObject->GetTransform().SetPosition(0, 0, 0);
 		//pQbertObject->GetTransform().SetHeight(64);
 		//pQbertObject->GetTransform().SetWidth(64);
 		sceneLevel1.Add(pQbertObject);
 
+		std::shared_ptr<CoilyObject> pCoily{ std::make_shared<CoilyObject>(false, pGameBoard->GetNrOfRows() - 1,pGameBoard, pQbertObject) };
+		pCoily->Init(0, 3);
+		sceneLevel1.Add(pCoily);
+
 		StreamEngine::InputManager::GetInstance().SetAmountOfPlayers(1);
-		
+		std::shared_ptr<MoveDown> pMoveDownCommand{ std::make_shared<MoveDown>(pQbertObject,pGameBoard) };
+		StreamEngine::InputManager::GetInstance().SetCommand(StreamEngine::FlexibleCommand{ pMoveDownCommand, true, XINPUT_GAMEPAD_DPAD_DOWN, 0, 0 });
+
+		std::shared_ptr<MoveUp> pMoveUpCommand{ std::make_shared<MoveUp>(pQbertObject,pGameBoard) };
+		StreamEngine::InputManager::GetInstance().SetCommand(StreamEngine::FlexibleCommand{ pMoveUpCommand, true, XINPUT_GAMEPAD_DPAD_UP, 0, 0 });
+
+		std::shared_ptr<MoveLeft> pMoveLeftCommand{ std::make_shared<MoveLeft>(pQbertObject, pGameBoard) };
+		StreamEngine::InputManager::GetInstance().SetCommand(StreamEngine::FlexibleCommand{ pMoveLeftCommand, true, XINPUT_GAMEPAD_DPAD_LEFT, 0, 0 });
+
+		std::shared_ptr<MoveRight> pMoveRightCommand{ std::make_shared<MoveRight>(pQbertObject,pGameBoard) };
+		StreamEngine::InputManager::GetInstance().SetCommand(StreamEngine::FlexibleCommand{ pMoveRightCommand, true, XINPUT_GAMEPAD_DPAD_RIGHT, 0,0 });
 	}
-	
+
 	StreamEngine::SceneManager::GetInstance().SetActiveScene("Level1");
 }
-

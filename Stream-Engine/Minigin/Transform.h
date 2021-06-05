@@ -21,6 +21,7 @@ namespace StreamEngine
 
 		const glm::vec3& GetPosition() const { return m_Position; }
 		void SetPosition(float x, float y, float z);
+		void SetPosition(const glm::vec3& newPos);
 
 		void SetHeight(const float height);
 		void SetWidth(const float width);

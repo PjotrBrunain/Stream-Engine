@@ -39,6 +39,18 @@
       <Filter>GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="MoveDown.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveUp.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveRight.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveLeft.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="CoilyObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -64,6 +76,18 @@
     <ClInclude Include="QbertObject.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="MoveDown.h" />
+    <ClInclude Include="MoveDown.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveUp.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveRight.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveLeft.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="CoilyObject.h" />
   </ItemGroup>
 </Project>
