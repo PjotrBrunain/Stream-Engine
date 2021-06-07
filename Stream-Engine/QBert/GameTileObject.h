@@ -13,6 +13,9 @@ public:
 
 	bool IsMaxLevel();
 
+	void SetRoundRobbing(bool isRoundRobbing);
+
 private:
+	bool m_IsRoundRobbing{};
 };
 

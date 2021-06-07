@@ -1,4 +1,5 @@
 #pragma once
+#include <SDL_stdinc.h>
 #include <XInput.h>
 #include "Singleton.h"
 
@@ -12,7 +13,8 @@ namespace StreamEngine
 		bool OnRelease{};
 		DWORD ControllerButton{};
 		int ControllerId{};
-		uint32_t KeyBoardButton{};
+		Sint32 KeyBoardButton{};
+		UINT8 MouseButton{};
 	};
 	
 	class InputManager final : public Singleton<InputManager>
@@ -22,6 +24,10 @@ namespace StreamEngine
 		bool IsPressed(const DWORD& button) const;
 		void SetCommand(const FlexibleCommand& command);
 		void SetAmountOfPlayers(int amountOfPlayers);
+		void ClearCommands();
+		int GetAmountOfPlayers() const;
+
+		void SetCommands(const std::vector<FlexibleCommand>& commands);
 	private:
 		XINPUT_STATE m_CurrentState{};
 		std::vector<FlexibleCommand> m_Commands{};

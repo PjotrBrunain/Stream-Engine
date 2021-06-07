@@ -50,7 +50,22 @@
     <ClCompile Include="MoveLeft.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
+    <ClCompile Include="SelectUpCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
     <ClCompile Include="CoilyObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectDownCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="LivesObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -88,6 +103,21 @@
     <ClInclude Include="MoveLeft.h">
       <Filter>Commands</Filter>
     </ClInclude>
-    <ClInclude Include="CoilyObject.h" />
+    <ClInclude Include="SelectComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectUpCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="CoilyObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectDownCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="LivesObject.h" />
   </ItemGroup>
 </Project>

@@ -1,10 +1,20 @@
 #include "GameBoardObject.h"
+
+#include <Windows.h>
 #include "GameTileObject.h"
+#include "Scene.h"
+#include "SceneManager.h"
+#include "SpriteTextureComponent.h"
+#include "QbertObject.h"
 
 GameBoardObject::GameBoardObject(int rows, int columns, float posX, float posY, float height, float width)
 	:GameObject(),
 	m_Rows(rows),
-	m_Columns(columns)
+	m_Columns(columns),
+	m_SwitchFlag(),
+	m_HasWon(),
+	m_FlashTime(),
+	m_NumberOfFlashesToGo(5)
 {
 	m_pChildObjects.resize(rows * columns);
 	m_Transform.SetPosition(posX, posY, 1);
@@ -81,10 +91,10 @@ const std::shared_ptr<StreamEngine::GameObject>& GameBoardObject::GetGameTile(in
 	return m_pChildObjects[row * m_Columns + column];
 }
 
-bool GameBoardObject::CheckWin() const
+bool GameBoardObject::CheckWin()
 {
 	bool hasWon{true};
-	for (std::shared_ptr<GameObject> PChildObject : m_pChildObjects)
+	for (const std::shared_ptr<StreamEngine::GameObject>& PChildObject : m_pChildObjects)
 	{
 		std::shared_ptr<GameTileObject> pGameTile{ std::dynamic_pointer_cast<GameTileObject>(PChildObject) };
 		if (pGameTile != nullptr)
@@ -92,12 +102,83 @@ bool GameBoardObject::CheckWin() const
 			hasWon = hasWon && pGameTile->IsMaxLevel();
 		}
 	}
+	m_HasWon = hasWon;
 	return hasWon;
 }
 
 float GameBoardObject::GetDistance(const OffsetTileCoords& coords1, const OffsetTileCoords& coords2)
 {
 	return CubeDistance(GetCubeCoords(coords1), GetCubeCoords(coords2));
+}
+
+void GameBoardObject::Update(float deltaTime)
+{
+	if (m_HasWon)
+	{
+		if (m_NumberOfFlashesToGo <= 0)
+		{
+			StreamEngine::SceneManager::GetInstance().SetActiveScene(m_NextScene);
+			auto& scene{ StreamEngine::SceneManager::GetInstance().GetScene(m_NextScene) };
+			if (StreamEngine::InputManager::GetInstance().GetAmountOfPlayers() == 1)
+			{
+				std::shared_ptr<QbertObject> pQbert = std::dynamic_pointer_cast<QbertObject>(scene.GetObjectByName("Qbert1"));
+				if (pQbert != nullptr)
+				{
+					pQbert->Init(0, 3, std::dynamic_pointer_cast<GameBoardObject>(scene.GetObjectByName("GameBoard")));
+				}
+			}
+			else if (StreamEngine::InputManager::GetInstance().GetAmountOfPlayers() == 2)
+			{
+				std::shared_ptr<QbertObject> pQbert1 = std::dynamic_pointer_cast<QbertObject>(scene.GetObjectByName("Qbert1"));
+				std::shared_ptr<QbertObject> pQbert2 = std::dynamic_pointer_cast<QbertObject>(scene.GetObjectByName("Qbert2"));
+				if (pQbert1 != nullptr && pQbert2 != nullptr)
+				{
+					pQbert1->Init(6, 0, std::dynamic_pointer_cast<GameBoardObject>(scene.GetObjectByName("GameBoard")));
+					pQbert2->Init(6, 0, std::dynamic_pointer_cast<GameBoardObject>(scene.GetObjectByName("GameBoard")));
+				}
+			}
+			std::shared_ptr<CoilyObject> pCoily = std::dynamic_pointer_cast<CoilyObject>(scene.GetObjectByName("Coily"));
+			if (pCoily != nullptr)
+			{
+				pCoily->Init(0, 3, std::dynamic_pointer_cast<GameBoardObject>(scene.GetObjectByName("GameBoard")));
+			}
+		}
+		if (m_FlashTime <= 0)
+		{
+			for (const std::shared_ptr<GameObject>& pChildObject : m_pChildObjects)
+			{
+				std::shared_ptr<GameTileObject> pGameTile{ std::dynamic_pointer_cast<GameTileObject>(pChildObject) };
+				if (pGameTile != nullptr)
+				{
+					if (m_SwitchFlag)
+					{
+						pGameTile->GetComponent<SpriteTextureComponent>()->SetSrcRectIdx(1);
+					}
+					else
+					{
+						pGameTile->GetComponent<SpriteTextureComponent>()->SetSrcRectIdx(0);
+					}
+					m_FlashTime = 500;
+				}
+			}
+			m_SwitchFlag = !m_SwitchFlag;
+			m_NumberOfFlashesToGo--;
+		}
+		else
+		{
+			m_FlashTime -= deltaTime;
+		}
+	}
+}
+
+bool GameBoardObject::GetHasWon() const
+{
+	return m_HasWon;
+}
+
+void GameBoardObject::SetNextScene(const std::string& name)
+{
+	m_NextScene = name;
 }
 
 CubeTileCoords GameBoardObject::GetCubeCoords(const OffsetTileCoords& coords)

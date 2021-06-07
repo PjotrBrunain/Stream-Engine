@@ -1,6 +1,8 @@
 #pragma once
 #include <GameObject.h>
 
+
+#include "CoilyObject.h"
 #include "SpriteTextureComponent.h"
 
 class GameBoardObject;
@@ -24,6 +26,10 @@ public:
 	bool GetIsJumping() const;
 	void SetDestPos(const glm::vec3& destPos);
 	void Die(int row, int column, const std::shared_ptr<GameBoardObject>& pGameBoard);
+	int GetLives() const;
+
+	void SetCoily(std::weak_ptr<CoilyObject> pCoilyObject);
+	void SetIsTeleporting(bool isTeleporting);
 private:
 	int m_Column;
 	int m_Row;
@@ -33,4 +39,10 @@ private:
 	float m_Speed;
 	float m_Delta;
 	int m_Lives;
+	std::weak_ptr<CoilyObject> m_pCoilyObject;
+	std::weak_ptr<GameBoardObject> m_pGameBoardObject;
+	bool m_IsTeleporting;
+
+	static bool OverLap(const Rect& a, const Rect& b);
+	static bool ValueInRange(float value, float min, float max);
 };

@@ -41,6 +41,9 @@ namespace StreamEngine
 		std::string GetName() const;
 		void SetName(const std::string& name);
 
+		void SetOwner(const std::weak_ptr<GameObject> owner);
+		void SetIsVisual(bool isVisual);
+
 		GameObject() = default;
 		GameObject(std::string name);
 		virtual ~GameObject();

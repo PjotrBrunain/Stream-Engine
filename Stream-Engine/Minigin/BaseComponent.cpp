@@ -6,14 +6,14 @@ StreamEngine::BaseComponent::BaseComponent(const bool isVisual, std::weak_ptr<Ga
 	m_pOwningGameObject(pOwningGameObject)
 {
 #if _DEBUG
-	std::cout << "BaseComp constructed\n";
+	//std::cout << "BaseComp constructed\n";
 #endif
 }
 
 StreamEngine::BaseComponent::~BaseComponent()
 {
 #if _DEBUG
-	std::cout << "BaseComp destructed\n";
+	//std::cout << "BaseComp destructed\n";
 #endif
 }
 

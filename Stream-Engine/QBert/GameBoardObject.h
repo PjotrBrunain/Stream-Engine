@@ -3,12 +3,12 @@
 #include "GameObject.h"
 #include "Structs.h"
 
+class QbertObject;
 class GameTileObject;
 
 class GameBoardObject final : public StreamEngine::GameObject
 {
 public:
-
 	GameBoardObject(int rows, int columns, float posX, float posY, float height, float width);
 
 	GameBoardObject(const GameBoardObject&) = delete;
@@ -31,14 +31,25 @@ public:
 	bool IsOnPlayboard(int row, int column);
 
 	const std::shared_ptr<StreamEngine::GameObject>& GetGameTile(int row, int column);
-	bool CheckWin() const;
+	bool CheckWin();
 
 	static float GetDistance(const OffsetTileCoords& coords1, const OffsetTileCoords& coords2);
+
+	void Update(float deltaTime) override;
+
+	bool GetHasWon() const;
+
+	void SetNextScene(const std::string& name);
+
 private:
-	
 	int m_Rows;
 	int m_Columns;
 	float m_HexSize;
 	static CubeTileCoords GetCubeCoords(const OffsetTileCoords& coords);
 	static float CubeDistance(const CubeTileCoords& a, const CubeTileCoords& b);
+	bool m_HasWon;
+	float m_FlashTime;
+	bool m_SwitchFlag;
+	int m_NumberOfFlashesToGo;
+	std::string m_NextScene;
 };

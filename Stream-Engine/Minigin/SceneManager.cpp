@@ -22,9 +22,18 @@ void StreamEngine::SceneManager::Render()
 	m_Scenes[m_CurrentScene]->Render();
 }
 
+StreamEngine::Scene& StreamEngine::SceneManager::GetScene(const std::string& name)
+{
+	return *m_Scenes[name].get();
+}
+
 void StreamEngine::SceneManager::SetActiveScene(std::string name)
 {
-	m_CurrentScene = name;
+	if (m_Scenes.find(name) != m_Scenes.end())
+	{
+		m_CurrentScene = name;
+		InputManager::GetInstance().SetCommands(m_Scenes[name]->GetCommands());
+	}
 }
 
 StreamEngine::Scene& StreamEngine::SceneManager::CreateScene(const std::string& name)

@@ -149,7 +149,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>Stream-Engine.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files (x86)\Visual Leak Detector\lib\Win32;$(SolutionDir)Lib\$(Configuration)\;$(SolutionDir)3rdParty\SDL2\lib\x64;$(SolutionDir)3rdParty\SDL2_image\lib\x64;$(SolutionDir)3rdParty\SDL2_ttf\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files (x86)\Visual Leak Detector\lib\Win64;$(SolutionDir)Lib\$(Configuration)\;$(SolutionDir)3rdParty\SDL2\lib\x64;$(SolutionDir)3rdParty\SDL2_image\lib\x64;$(SolutionDir)3rdParty\SDL2_ttf\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -169,19 +169,24 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>Minigin.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files (x86)\Visual Leak Detector\lib\Win32;$(SolutionDir)Lib\$(Configuration)\;$(SolutionDir)3rdParty\SDL2\lib\x64;$(SolutionDir)3rdParty\SDL2_image\lib\x64;$(SolutionDir)3rdParty\SDL2_ttf\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files (x86)\Visual Leak Detector\lib\Win64;$(SolutionDir)Lib\$(Configuration)\;$(SolutionDir)3rdParty\SDL2\lib\x64;$(SolutionDir)3rdParty\SDL2_image\lib\x64;$(SolutionDir)3rdParty\SDL2_ttf\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CoilyObject.cpp" />
     <ClCompile Include="GameBoardObject.cpp" />
     <ClCompile Include="GameTileObject.cpp" />
+    <ClCompile Include="LivesObject.cpp" />
     <ClCompile Include="MoveDown.cpp" />
     <ClCompile Include="MoveLeft.cpp" />
     <ClCompile Include="MoveRight.cpp" />
     <ClCompile Include="MoveUp.cpp" />
     <ClCompile Include="QBert.cpp" />
     <ClCompile Include="QbertObject.cpp" />
+    <ClCompile Include="SelectCommand.cpp" />
+    <ClCompile Include="SelectComponent.cpp" />
+    <ClCompile Include="SelectDownCommand.cpp" />
+    <ClCompile Include="SelectUpCommand.cpp" />
     <ClCompile Include="SpriteTextureComponent.cpp" />
     <ClCompile Include="TeleportObject.cpp" />
   </ItemGroup>
@@ -189,12 +194,17 @@
     <ClInclude Include="CoilyObject.h" />
     <ClInclude Include="GameBoardObject.h" />
     <ClInclude Include="GameTileObject.h" />
+    <ClInclude Include="LivesObject.h" />
     <ClInclude Include="LoadFunction.h" />
     <ClInclude Include="MoveDown.h" />
     <ClInclude Include="MoveLeft.h" />
     <ClInclude Include="MoveRight.h" />
     <ClInclude Include="MoveUp.h" />
     <ClInclude Include="QbertObject.h" />
+    <ClInclude Include="SelectCommand.h" />
+    <ClInclude Include="SelectComponent.h" />
+    <ClInclude Include="SelectDownCommand.h" />
+    <ClInclude Include="SelectUpCommand.h" />
     <ClInclude Include="SpriteTextureComponent.h" />
     <ClInclude Include="Structs.h" />
     <ClInclude Include="TeleportObject.h" />

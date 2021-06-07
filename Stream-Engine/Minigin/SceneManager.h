@@ -16,6 +16,8 @@ namespace StreamEngine
 		void LateUpdate(const float deltaTime);
 		void Render();
 
+		Scene& GetScene(const std::string& name);
+
 		void SetActiveScene(std::string name);
 	private:
 		friend class Singleton<SceneManager>;

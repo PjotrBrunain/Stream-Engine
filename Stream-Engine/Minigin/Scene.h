@@ -1,4 +1,6 @@
 #pragma once
+#include "Command.h"
+#include "InputManager.h"
 #include "SceneManager.h"
 
 namespace StreamEngine
@@ -18,6 +20,9 @@ namespace StreamEngine
 		void Render() const;
 
 		std::shared_ptr<GameObject> GetObjectByName(std::string name) const;
+		const std::vector<FlexibleCommand>& GetCommands() const;
+
+		void AddCommand(const FlexibleCommand& command);
 
 		~Scene();
 		Scene(const Scene& other) = delete;
@@ -29,6 +34,7 @@ namespace StreamEngine
 
 		std::string m_Name;
 		std::vector < std::shared_ptr<GameObject>> m_Objects{};
+		std::vector<FlexibleCommand> m_SceneCommands{};
 
 		static unsigned int m_IdCounter; 
 	};

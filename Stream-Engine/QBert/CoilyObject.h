@@ -7,9 +7,9 @@ class GameBoardObject;
 class CoilyObject : public StreamEngine::GameObject
 {
 public:
-	CoilyObject(bool isPlayerControlled, int bottomRow, std::shared_ptr<GameBoardObject> pGameBoard, std::shared_ptr<QbertObject> pQbert);
-	CoilyObject(bool isPlayerControlled, int bottomRow, std::shared_ptr<GameBoardObject> pGameBoard, std::shared_ptr<QbertObject> pQbert1, std::shared_ptr<QbertObject> pQbert2);
-	void Init(int row, int column);
+	CoilyObject(bool isPlayerControlled, int bottomRow, std::shared_ptr<QbertObject> pQbert);
+	CoilyObject(bool isPlayerControlled, int bottomRow, std::shared_ptr<QbertObject> pQbert1, std::shared_ptr<QbertObject> pQbert2);
+	void Init(int row, int column, const std::shared_ptr<GameBoardObject>& pGameBoard);
 
 	int GetRow() const;
 	int GetColumn() const;

@@ -13,12 +13,57 @@ bool StreamEngine::InputManager::ProcessInput()
 			return false;
 		}
 		if (e.type == SDL_KEYDOWN) 
-		{	
+		{
+			for (const FlexibleCommand flexiCommand : m_Commands)
+			{
+				if (!flexiCommand.OnRelease)
+				{
+					if (flexiCommand.KeyBoardButton == e.key.keysym.sym)
+					{
+						flexiCommand.pCommand->Execute();
+					}
+				}
+			}
 		}
 		if (e.type == SDL_MOUSEBUTTONDOWN)
 		{
+			for (const FlexibleCommand flexiCommand : m_Commands)
+			{
+				if (!flexiCommand.OnRelease)
+				{
+					if (flexiCommand.MouseButton == e.button.button)
+					{
+						flexiCommand.pCommand->Execute();
+					}
+				}
+			}
 		}
-		
+		if (e.type == SDL_KEYUP)
+		{
+			for (const FlexibleCommand flexiCommand : m_Commands)
+			{
+				if (flexiCommand.OnRelease)
+				{
+					if (flexiCommand.KeyBoardButton == e.key.keysym.sym)
+					{
+						flexiCommand.pCommand->Execute();
+					}
+				}
+			}
+		}
+		if (e.type == SDL_MOUSEBUTTONUP)
+		{
+			for (const FlexibleCommand flexiCommand : m_Commands)
+			{
+				if (flexiCommand.OnRelease)
+				{
+					if (flexiCommand.MouseButton == e.button.button)
+					{
+						flexiCommand.pCommand->Execute();
+					}
+				}
+			}
+		}
 	}
 
 	for (int i = 0; i < m_AmountOfPlayers; ++i)
@@ -110,5 +155,20 @@ void StreamEngine::InputManager::SetCommand(const FlexibleCommand& command)
 void StreamEngine::InputManager::SetAmountOfPlayers(int amountOfPlayers)
 {
 	m_AmountOfPlayers = amountOfPlayers;
+}
+
+void StreamEngine::InputManager::ClearCommands()
+{
+	m_Commands.clear();
+}
+
+int StreamEngine::InputManager::GetAmountOfPlayers() const
+{
+	return m_AmountOfPlayers;
+}
+
+void StreamEngine::InputManager::SetCommands(const std::vector<FlexibleCommand>& commands)
+{
+	m_Commands = commands;
 }
 

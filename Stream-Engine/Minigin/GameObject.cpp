@@ -11,7 +11,10 @@ StreamEngine::Transform& StreamEngine::GameObject::GetTransform()
 
 void StreamEngine::GameObject::Render()
 {
-	std::for_each(m_pComponents.begin(), m_pComponents.end(), [](std::shared_ptr<BaseComponent> pComponent) {if (pComponent->IsVisual()) pComponent->Render(); });
+	if (m_IsVisual)
+	{
+		std::for_each(m_pComponents.begin(), m_pComponents.end(), [](std::shared_ptr<BaseComponent> pComponent) {if (pComponent->IsVisual()) pComponent->Render(); });
+	}
 }
 
 bool StreamEngine::GameObject::IsVisual() const
@@ -32,6 +35,16 @@ std::string StreamEngine::GameObject::GetName() const
 void StreamEngine::GameObject::SetName(const std::string& name)
 {
 	m_Name = name;
+}
+
+void StreamEngine::GameObject::SetOwner(const std::weak_ptr<GameObject> owner)
+{
+	m_pOwner = owner;
+}
+
+void StreamEngine::GameObject::SetIsVisual(bool isVisual)
+{
+	m_IsVisual = isVisual;
 }
 
 StreamEngine::GameObject::GameObject(std::string name)

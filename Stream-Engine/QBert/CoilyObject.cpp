@@ -8,60 +8,67 @@
 #include "SpriteTextureComponent.h"
 #include "Structs.h"
 
-CoilyObject::CoilyObject(bool isPlayerControlled, int bottomRow, std::shared_ptr<GameBoardObject> pGameBoard, std::shared_ptr<QbertObject> pQbert)
+CoilyObject::CoilyObject(bool isPlayerControlled, int bottomRow, std::shared_ptr<QbertObject> pQbert)
 	:GameObject(),
 	m_CurrentMoveDirection(Move::Right),
 	m_IsJumping(true),
-	m_Speed(.3f),
+	m_Speed(.4f),
 	m_Delta(5.f),
 	m_Column(),
 	m_Row(),
-	m_DeadTimeRemaining(2.f),
+	m_DeadTimeRemaining(3000),
 	m_IsBall(true),
 	m_BottomRow(bottomRow),
-	m_pGameBoard(std::move(pGameBoard)),
+	m_pGameBoard(nullptr),
 	m_pQbert1(std::move(pQbert)),
 	m_pQbert2(nullptr),
-	m_IsPlayerControlled(isPlayerControlled)
+	m_IsPlayerControlled(isPlayerControlled),
+	m_CoolDown()
 {
 }
 
-CoilyObject::CoilyObject(bool isPlayerControlled, int bottomRow, std::shared_ptr<GameBoardObject> pGameBoard, std::shared_ptr<QbertObject> pQbert1, std::shared_ptr<QbertObject> pQbert2)
+CoilyObject::CoilyObject(bool isPlayerControlled, int bottomRow, std::shared_ptr<QbertObject> pQbert1, std::shared_ptr<QbertObject> pQbert2)
 	:GameObject(),
 	m_CurrentMoveDirection(Move::Right),
 	m_IsJumping(true),
-	m_Speed(.5f),
+	m_Speed(.4f),
 	m_Delta(2.f),
 	m_Column(),
 	m_Row(),
-	m_DeadTimeRemaining(2.f),
+	m_DeadTimeRemaining(3000),
 	m_IsBall(true),
 	m_BottomRow(bottomRow),
-	m_pGameBoard(std::move(pGameBoard)),
+	m_pGameBoard(nullptr),
 	m_pQbert1(std::move(pQbert1)),
 	m_pQbert2(std::move(pQbert2)),
-	m_IsPlayerControlled(isPlayerControlled)
+	m_IsPlayerControlled(isPlayerControlled),
+	m_CoolDown()
 {
 }
 
-void CoilyObject::Init(int row, int column)
+void CoilyObject::Init(int row, int column, const std::shared_ptr<GameBoardObject>& pGameBoard)
 {
-	std::shared_ptr<SpriteTextureComponent> pSpriteComponent{ std::make_shared<SpriteTextureComponent>("Arcade - QBert - General Sprites.png", weak_from_this()) };
-	for (int i = 0; i < 8; ++i)
+	if (GetComponent<SpriteTextureComponent>() == nullptr)
 	{
-		pSpriteComponent->AddSrcRect(Rect{ 32.f, i * 16.f, 16.f, 32.f });
+		std::shared_ptr<SpriteTextureComponent> pSpriteComponent{ std::make_shared<SpriteTextureComponent>("Arcade - QBert - General Sprites.png", weak_from_this()) };
+		for (int i = 0; i < 8; ++i)
+		{
+			pSpriteComponent->AddSrcRect(Rect{ 32.f, i * 16.f, 16.f, 32.f });
+		}
+		pSpriteComponent->AddSrcRect(Rect{ 16.f, 64.f, 16.f,16.f });
+		pSpriteComponent->AddSrcRect(Rect{ 16.f, 80.f, 16.f,16.f });
+		AddComponent(pSpriteComponent);
 	}
-	pSpriteComponent->AddSrcRect(Rect{ 16.f, 64.f, 16.f,16.f });
-	pSpriteComponent->AddSrcRect(Rect{ 16.f, 80.f, 16.f,16.f });
-	pSpriteComponent->SetSrcRectIdx(9);
-	AddComponent(pSpriteComponent);
-
+	m_pGameBoard = pGameBoard;
 	m_Column = column;
 	m_Row = row;
-	m_Transform.SetPosition(m_pGameBoard->GetTilePosition(row, column).x + m_pGameBoard->GetTileWidth(row, column) / 8 * 3, m_pGameBoard->GetTilePosition(row, column).y - m_pGameBoard->GetHexSize() * 2 + m_pGameBoard->GetTileHeight(row, column) / 4, 1);
+	m_Transform.SetPosition(m_pGameBoard->GetTilePosition(row, column).x + m_pGameBoard->GetTileWidth(row, column) / 8 * 3, m_pGameBoard->GetTilePosition(row, column).y - m_pGameBoard->GetHexSize() * 3 + m_pGameBoard->GetTileHeight(row, column) / 4, 1);
 	m_Transform.SetHeight(m_pGameBoard->GetTileHeight(row, column) / 2);
 	m_Transform.SetWidth(m_pGameBoard->GetTileWidth(row, column) / 4);
 	m_DestPos = { m_pGameBoard->GetTilePosition(row, column).x + m_pGameBoard->GetTileWidth(row, column) / 8 * 3, m_pGameBoard->GetTilePosition(row, column).y - m_pGameBoard->GetHexSize() + m_pGameBoard->GetTileHeight(row, column) / 4, 1 };
+	m_IsBall = true;
+	GetComponent<SpriteTextureComponent>()->SetSrcRectIdx(9);
+	m_DeadTimeRemaining = 3000;
 }
 
 int CoilyObject::GetRow() const
@@ -197,7 +204,7 @@ void CoilyObject::SetIsJumping(bool isJumping)
 			++(*pSpriteComponent);
 		}
 		m_IsJumping = isJumping;
-		m_CoolDown = 1000;
+		m_CoolDown = 500;
 	}
 }
 
@@ -223,92 +230,104 @@ void CoilyObject::Die(int row, int column)
 
 void CoilyObject::JumpDown()
 {
-	if (!m_IsJumping)
+	if (!m_pGameBoard->GetHasWon())
 	{
-		if (m_Row % 2 == 0)
+		if (!m_IsJumping)
 		{
-			m_Column--;
-		}
-		m_Row++;
-		if (m_pGameBoard->IsOnPlayboard(m_Row, m_Column))
-		{
-			m_DestPos = glm::vec3{ m_pGameBoard->GetTilePosition(m_Row, m_Column).x + m_pGameBoard->GetTileWidth(m_Row, m_Column) / 8 * 3, m_pGameBoard->GetTilePosition(m_Row, m_Column).y - m_pGameBoard->GetHexSize() + m_pGameBoard->GetTileHeight(m_Row, m_Column) / 4, 1 };
-			if (!m_IsBall)
+			if (m_Row % 2 == 0)
 			{
-				SetMoveDirection(Move::Down);
+				m_Column--;
 			}
-			SetIsJumping(true);
-		}
-		else if (m_IsBall)
-		{
-			JumpRight();
+			m_Row++;
+			if (m_pGameBoard->IsOnPlayboard(m_Row, m_Column))
+			{
+				m_DestPos = glm::vec3{ m_pGameBoard->GetTilePosition(m_Row, m_Column).x + m_pGameBoard->GetTileWidth(m_Row, m_Column) / 8 * 3, m_pGameBoard->GetTilePosition(m_Row, m_Column).y - m_pGameBoard->GetHexSize() + m_pGameBoard->GetTileHeight(m_Row, m_Column) / 4, 1 };
+				if (!m_IsBall)
+				{
+					SetMoveDirection(Move::Down);
+				}
+				SetIsJumping(true);
+			}
+			else if (m_IsBall)
+			{
+				JumpRight();
+			}
 		}
 	}
 }
 
 void CoilyObject::JumpUp()
 {
-	if (!m_IsJumping)
+	if (!m_pGameBoard->GetHasWon())
 	{
-		if (m_Row % 2 == 1)
+		if (!m_IsJumping)
 		{
-			m_Column++;
-		}
-		m_Row--;
-		if (m_pGameBoard->IsOnPlayboard(m_Row, m_Column))
-		{
-			m_DestPos = glm::vec3{ m_pGameBoard->GetTilePosition(m_Row, m_Column).x + m_pGameBoard->GetTileWidth(m_Row, m_Column) / 8 * 3, m_pGameBoard->GetTilePosition(m_Row, m_Column).y - m_pGameBoard->GetHexSize() + m_pGameBoard->GetTileHeight(m_Row, m_Column) / 4, 1 };
-			if (!m_IsBall)
+			if (m_Row % 2 == 1)
 			{
-				SetMoveDirection(Move::Up);
+				m_Column++;
 			}
-			SetIsJumping(true);
+			m_Row--;
+			if (m_pGameBoard->IsOnPlayboard(m_Row, m_Column))
+			{
+				m_DestPos = glm::vec3{ m_pGameBoard->GetTilePosition(m_Row, m_Column).x + m_pGameBoard->GetTileWidth(m_Row, m_Column) / 8 * 3, m_pGameBoard->GetTilePosition(m_Row, m_Column).y - m_pGameBoard->GetHexSize() + m_pGameBoard->GetTileHeight(m_Row, m_Column) / 4, 1 };
+				if (!m_IsBall)
+				{
+					SetMoveDirection(Move::Up);
+				}
+				SetIsJumping(true);
+			}
 		}
 	}
 }
 
 void CoilyObject::JumpRight()
 {
-	if (!m_IsJumping)
+	if (!m_pGameBoard->GetHasWon())
 	{
-		if (m_Row % 2 == 1)
+		if (!m_IsJumping)
 		{
-			m_Column++;
-		}
-		m_Row++;
-		if (m_pGameBoard->IsOnPlayboard(m_Row, m_Column))
-		{
-			m_DestPos = glm::vec3{ m_pGameBoard->GetTilePosition(m_Row, m_Column).x + m_pGameBoard->GetTileWidth(m_Row, m_Column) / 8 * 3, m_pGameBoard->GetTilePosition(m_Row, m_Column).y - m_pGameBoard->GetHexSize() + m_pGameBoard->GetTileHeight(m_Row, m_Column) / 4, 1 };
-			if (!m_IsBall)
+			if (m_Row % 2 == 1)
 			{
-				SetMoveDirection(Move::Right);
+				m_Column++;
 			}
-			SetIsJumping(true);
-		}
-		else if (m_IsBall)
-		{
-			JumpDown();
+			m_Row++;
+			if (m_pGameBoard->IsOnPlayboard(m_Row, m_Column))
+			{
+				m_DestPos = glm::vec3{ m_pGameBoard->GetTilePosition(m_Row, m_Column).x + m_pGameBoard->GetTileWidth(m_Row, m_Column) / 8 * 3, m_pGameBoard->GetTilePosition(m_Row, m_Column).y - m_pGameBoard->GetHexSize() + m_pGameBoard->GetTileHeight(m_Row, m_Column) / 4, 1 };
+				if (!m_IsBall)
+				{
+					SetMoveDirection(Move::Right);
+				}
+				SetIsJumping(true);
+			}
+			else if (m_IsBall)
+			{
+				JumpDown();
+			}
 		}
 	}
 }
 
 void CoilyObject::JumpLeft()
 {
-	if (!m_IsJumping)
+	if (!m_pGameBoard->GetHasWon())
 	{
-		if (m_Row % 2 == 0)
+		if (!m_IsJumping)
 		{
-			m_Column--;
-		}
-		m_Row--;
-		if (m_pGameBoard->IsOnPlayboard(m_Row, m_Column))
-		{
-			m_DestPos = glm::vec3{ m_pGameBoard->GetTilePosition(m_Row, m_Column).x + m_pGameBoard->GetTileWidth(m_Row, m_Column) / 8 * 3, m_pGameBoard->GetTilePosition(m_Row, m_Column).y - m_pGameBoard->GetHexSize() + m_pGameBoard->GetTileHeight(m_Row, m_Column) / 4, 1 };
-			if (!m_IsBall)
+			if (m_Row % 2 == 0)
 			{
-				SetMoveDirection(Move::Left);
+				m_Column--;
 			}
-			SetIsJumping(true);
+			m_Row--;
+			if (m_pGameBoard->IsOnPlayboard(m_Row, m_Column))
+			{
+				m_DestPos = glm::vec3{ m_pGameBoard->GetTilePosition(m_Row, m_Column).x + m_pGameBoard->GetTileWidth(m_Row, m_Column) / 8 * 3, m_pGameBoard->GetTilePosition(m_Row, m_Column).y - m_pGameBoard->GetHexSize() + m_pGameBoard->GetTileHeight(m_Row, m_Column) / 4, 1 };
+				if (!m_IsBall)
+				{
+					SetMoveDirection(Move::Left);
+				}
+				SetIsJumping(true);
+			}
 		}
 	}
 }

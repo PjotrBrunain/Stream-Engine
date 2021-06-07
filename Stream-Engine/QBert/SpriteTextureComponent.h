@@ -23,7 +23,7 @@ public:
 	~SpriteTextureComponent() override = default;
 	void Render() const override;
 
-	void SetSrcRectIdx(int srcRectIdx);
+	void SetSrcRectIdx(unsigned int srcRectIdx);
 	unsigned int GetCurrentSrcRectIdx() const;
 	void AddSrcRect(const Rect& srcRect);
 
